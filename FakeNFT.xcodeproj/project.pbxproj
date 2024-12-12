@@ -512,7 +512,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					3F68069229CBBAF100B4F915 = {
 						CreatedOnToolsVersion = 14.2;
@@ -963,7 +963,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FDADF454982A8057BB31AE51 /* Pods-FakeNFTTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -983,7 +982,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F14910062595632023C142A7 /* Pods-FakeNFTTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1003,7 +1001,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A8E20BF20A3B3192FCAA3854 /* Pods-FakeNFT-FakeNFTUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1021,7 +1018,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8CA29D0707E24B8B9FAA5365 /* Pods-FakeNFT-FakeNFTUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
