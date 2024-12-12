@@ -1,0 +1,91 @@
+/* 
+  Localizable.strings
+  FakeNFT
+
+  Created by Aliaksandr Charnyshou on 11.12.2024.
+  
+*/
+
+"alert.ok" = "OK";
+"alert.yes" = "Yes";
+"alert.no" = "No";
+"alert.close" = "Close";
+"alert.cancel" = "Cancel";
+"alert.tryAgain" = "Try again";
+"alert.repeat" = "Repeat";
+"alert.sort.title" = "Sort";
+"alert.sort.price" = "By price";
+"alert.sort.rating" = "By rating";
+"alert.sort.name" = "By name";
+
+"ptr" = "Pull down to refresh";
+
+"network.error.httpStatusCode" = "Something went wrong";
+"network.error.httpStatusCode4xx" = "Client Error";
+"network.error.httpStatusCode5xx" = "Server Error";
+"network.error.httpStatusCode429" = "Too many requests. Try again later.";
+"network.error.urlRequestError" = "Something went wrong";
+"network.error.urlSessionError" = "Something went wrong";
+"network.error.parsingError" = "Failed to parse the response";
+
+"profile.title" = "Profile";
+"profile.name" = "Name";
+"profile.description" = "Description";
+"profile.website" = "Website";
+"profile.about" = "About the developer";
+"profile.avatar.change" = "Change\nphoto";
+"profile.alert.avatar.title" = "Change photo";
+"profile.alert.avatar.subtitle" = "Enter URL of a new photo";
+"profile.alert.avatar.placeholder" = "Enter URL";
+"profile.alert.urlError" = "An error occurred while parsing the link";
+"profile.alert.fetchError" = "An error occurred while loading the profile";
+"profile.alert.editError" = "An error occurred while changing profile data";
+"profile.alert.saveChanges" = "Do you want to save the changes?";
+
+"profile.myNFT.title" = "My NFT";
+"profile.myNFT.empty" = "You don't have NFT yet";
+"profile.myNFT.search.placeholder" = "Enter NFT name or the author's name";
+"profile.myNFT.nothingFound" = "Nothing found";
+"profile.myNFT.price.title" = "Price";
+"profile.myNFT.author.title" = "by";
+"profile.myNFT.alert.fetchError" = "An error occurred while loading the nfts";
+
+"profile.favouriteNFT.title" = "Favourite NFT";
+"profile.favouriteNFT.empty" = "You don't have favourite NFT yet";
+"profile.favouriteNFT.search.placeholder" = "Enter favourite NFT name";
+"profile.favouriteNFT.nothingFound" = "Nothing found";
+"profile.favouriteNFT.alert.fetchError" = "An error occurred while loading the favourite nfts";
+"profile.favouriteNFT.alert.unlikeError" = "An error occurred while removing the like";
+
+"profile.aboutDeveloper.title" = "About the developer";
+
+"cart.title" = "Cart";
+"cart.pay" = "Pay";
+"cart.toBePaid" = "To be paid";
+"cart.price" = "Price";
+"cart.delete" = "Delete";
+"cart.return" =  "Return";
+"cart.deleteQuestion" = "Are you sure you want\nto remove the item from the Trash?";
+"cart.cartEmpty" = "Cart is Empty";
+"cart.choosePay" = "Select a payment method";
+"cart.userAgreementStart" = "By making a purchase, you agree to the terms and conditions";
+"cart.userAgreementEnd" = "User Agreement";
+"cart.successPay" = "Success! Payment completed,\ncongratulations on your purchase!";
+"cart.backCataloge" = "Return to catalog";
+"cart.failurePay" = "Failed to make\npayment";
+"cart.networkAlertTitle" = "Something went wrong(";
+"cart.networkAlertMessage" = "Internet connection problem";
+
+"statistics.title" = "Statistics";
+"statistics.sorted" = "Sorted";
+"statistics.byName" = "By name";
+"statistics.byRating" = "By rating";
+"statistics.close" = "Close";
+"statistics.goToWebsite" = "Go to the user website";
+"statistics.collectionNFT" = "Collection NFT";
+"statistics.Error" = "Network error";
+"statistics.ErrorAction" = "Again";
+"statistics.ErrorActionCancel" = "Cancel";
+"statistics.isEmpty" = "It's empty";
+
+"catalog.title" = "Catalog";
