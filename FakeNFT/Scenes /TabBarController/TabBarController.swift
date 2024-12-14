@@ -7,7 +7,7 @@ final class TabBarController: UITabBarController {
 
     // MARK: - Private Properties
     private var catalogNavigationController: UINavigationController {
-        let vc = ProfileViewController()
+        let vc = CatalogViewController()
         let navVC = UINavigationController(rootViewController: vc)
 
         navVC.tabBarItem = UITabBarItem(
@@ -20,7 +20,7 @@ final class TabBarController: UITabBarController {
     }
 
     private var cartNavigationController: UINavigationController {
-        let vc = ProfileViewController()
+        let vc = CartViewController()
         let navVC = UINavigationController(rootViewController: vc)
 
         navVC.tabBarItem = UITabBarItem(
@@ -34,7 +34,8 @@ final class TabBarController: UITabBarController {
 
     private var profileNavigationController: UINavigationController {
         let navigationController = UINavigationController()
-        let viewController = ProfileViewController()
+        let viewModel = ProfileViewModel()
+        let viewController = ProfileViewController(viewModel: viewModel)
 
         navigationController.viewControllers = [viewController]
 
@@ -47,7 +48,7 @@ final class TabBarController: UITabBarController {
     }
 
     private var statisticNavigationController: UINavigationController {
-        let vc = ProfileViewController()
+        let vc = StatisticViewController()
         let navVC = UINavigationController(rootViewController: vc)
 
         navVC.tabBarItem = UITabBarItem(
