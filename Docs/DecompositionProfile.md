@@ -19,17 +19,17 @@
 `Total:` est: 11 h, fact: 10 h.
 
 ### Экран Редактировать профиль
-- UI (est: 7 h, fact: X h):
-    - `TextField` для полей `name`, `website` (est: 2 h, fact: X h);
-    - `TextView` для поля `description` (est: 1.5 h, fact: X h);
-    - `ImageView` для аватара с лейблом "Сменить фото" (est: 3 h, fact: X h);
+- UI (est: 7 h, fact: 5 h):
+    - `TextField` для полей `name`, `website` (est: 2 h, fact: 1 h);
+    - `TextView` для поля `description` (est: 1.5 h, fact: 1 h);
+    - `ImageView` для аватара с лейблом "Сменить фото" (est: 3 h, fact: 3 h);
     - Лейблы для полей и кнопка `Close` (est: 0.5 h, fact: X h).
-- Сеть и логика (est: 5 h, fact: X h):
-    - Изменение фото (est: 1.5 h, fact: X h);
-    - Сохранение изменных данных о пользователе (est: 3 h, fact: X h);
-    - Закрытие экрана (est: 0.5 h, fact: X h).
+- Сеть и логика (est: 5 h, fact: 5 h):
+    - Изменение фото (est: 1.5 h, fact: 1.5 h);
+    - Сохранение изменных данных о пользователе (est: 3 h, fact: 3 h);
+    - Закрытие экрана (est: 0.5 h, fact: 0.5 h).
 
-`Total:` est: 12 h, fact: X h.
+`Total:` est: 12 h, fact: 10 h.
 
 ## Модуль 2:
 ### Экран Мои NFT
