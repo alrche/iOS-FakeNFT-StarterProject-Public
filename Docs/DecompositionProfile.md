@@ -12,7 +12,7 @@
     - Основная информация о пользователе - `avatar`, `name`, `description`, `website` (est: 3 h, , fact: 3 h);
     - `TableView` для перехода на экраны `MyNFT`, `FavouriteNFT`, `About` (est: 2.5 h, fact: 2.5 h);
     - `NavBar` с кнопкой `Edit` (est: 0.5 h, fact: 0.5 h).
-- Сеть и логика (est: 5 h, fact: X h):
+- Сеть и логика (est: 5 h, fact: 4 h):
     - Загрузка данных о пользователе (est: 4 h, fact: 3.5 h)
     - Открытие экрана `Редактировать профиль` (est: 1 h, fact: 0.5 h)
 
