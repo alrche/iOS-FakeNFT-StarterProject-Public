@@ -19,10 +19,10 @@ struct ChangeProfileRequest: NetworkRequest {
     }
     
     var dto: Dto? {
-        ChangeProfileDtoObject(param1: model.name,
-                               param2: model.avatar,
-                               param3: model.description,
-                               param4: model.website)
+        ChangeProfileDtoObject(name: model.name,
+                               avatar: model.avatar,
+                               description: model.description,
+                               website: model.website)
     }
     
     init(model: EditProfileModel) {
@@ -32,25 +32,25 @@ struct ChangeProfileRequest: NetworkRequest {
 }
 
 struct ChangeProfileDtoObject: Dto {
-    let param1: String
-    let param2: String
-    let param3: String
-    let param4: String
-    
+    let name: String
+    let avatar: String
+    let description: String
+    let website: String
+
     
     enum CodingKeys: String, CodingKey {
-        case param1 = "name"
-        case param2 = "avatar"
-        case param3 = "description"
-        case param4 = "website"
+        case name
+        case avatar
+        case description
+        case website
     }
     
     func asDictionary() -> [String : String] {
         [
-            CodingKeys.param1.rawValue: param1,
-            CodingKeys.param2.rawValue: param2,
-            CodingKeys.param3.rawValue: param3,
-            CodingKeys.param4.rawValue: param4
+            CodingKeys.name.rawValue: name,
+            CodingKeys.avatar.rawValue: avatar,
+            CodingKeys.description.rawValue: description,
+            CodingKeys.website.rawValue: website
         ]
     }
 }

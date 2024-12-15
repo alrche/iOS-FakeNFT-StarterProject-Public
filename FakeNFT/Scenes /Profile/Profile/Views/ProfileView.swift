@@ -10,9 +10,11 @@ import Kingfisher
 import SkeletonView
 
 // MARK: - ProfileView
+
 final class ProfileView: UIView {
 
     // MARK: - Private properties
+
     private enum Constants {
         enum ContentView {
             static let horizontalSpacing: CGFloat = 16
@@ -117,6 +119,7 @@ final class ProfileView: UIView {
     }()
 
     // MARK: - Initializers
+
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -131,6 +134,7 @@ final class ProfileView: UIView {
     }
 
     // MARK: - Overridden methods
+
     override func updateConstraints() {
         self.tableView.layoutIfNeeded()
         self.tableViewHeightAnchor.constant = min(
@@ -141,6 +145,7 @@ final class ProfileView: UIView {
     }
 
     // MARK: - Public methods
+
     func initialize(gestureRecognizer: UIGestureRecognizer) {
         websiteLabel.addGestureRecognizer(gestureRecognizer)
     }
@@ -163,6 +168,7 @@ final class ProfileView: UIView {
     }
 
     // MARK: - Layout
+
     private var scrollViewConstraints: [NSLayoutConstraint] {
         [
             scrollView.contentLayoutGuide.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
@@ -288,6 +294,7 @@ final class ProfileView: UIView {
 }
 
 // MARK: - UITableViewDataSource
+
 extension ProfileView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -303,6 +310,7 @@ extension ProfileView: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
+
 extension ProfileView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

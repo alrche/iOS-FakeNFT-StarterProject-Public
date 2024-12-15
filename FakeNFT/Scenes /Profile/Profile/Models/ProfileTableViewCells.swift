@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - ProfileTableViewCells
 enum ProfileTableViewCells {
     case myNFT(Int)
     case favouriteNFT(Int)

@@ -8,12 +8,15 @@
 import UIKit
 
 // MARK: - TextField
+
 final class TextField: UITextField {
 
     // MARK: - Public Properties
-    let padding: UIEdgeInsets
+
+    private let padding: UIEdgeInsets
 
     // MARK: - Initializers
+
     init(
         cornerRadius: CGFloat = 12,
         padding: UIEdgeInsets = UIEdgeInsets(top: 11, left: 16, bottom: 11, right: 40)
@@ -32,6 +35,7 @@ final class TextField: UITextField {
     }
 
     // MARK: - Overridden Methods
+    
     override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
         let originalRect = super.clearButtonRect(forBounds: bounds)
         return originalRect.offsetBy(dx: -10, dy: 0)

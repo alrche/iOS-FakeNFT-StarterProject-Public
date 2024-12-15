@@ -8,9 +8,11 @@
 import UIKit
 
 // MARK: - ProfileTableViewCell
+
 final class ProfileTableViewCell: UITableViewCell, ReuseIdentifying {
 
     // MARK: - Initializers
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -25,6 +27,7 @@ final class ProfileTableViewCell: UITableViewCell, ReuseIdentifying {
     }
 
     // MARK: - Public Methods
+    
     func configCell(label: String) {
         textLabel?.text = label
     }

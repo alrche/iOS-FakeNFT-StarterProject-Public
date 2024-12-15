@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - AlertWithTextFieldModel
 struct AlertWithTextFieldModel {
 
     let title: String

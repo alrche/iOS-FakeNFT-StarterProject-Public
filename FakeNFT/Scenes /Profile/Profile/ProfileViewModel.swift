@@ -8,9 +8,11 @@
 import Foundation
 
 // MARK: - ProfileViewModel
+
 final class ProfileViewModel {
 
     // MARK: - Public properties
+
     var onProfileInfoChanged: (() -> Void)?
     var onFetchError: ((String) -> Void)?
     var onEditError: ((String) -> Void)?
@@ -28,12 +30,14 @@ final class ProfileViewModel {
     }
 
     // MARK: - Private properties
+
     private var profileObservation: NSKeyValueObservation?
     private var userDefaults: UserDefaults {
         UserDefaults.standard
     }
 
     // MARK: - Public methods
+
     func viewDidLoad() {
         registerProfileLastChangeTimeObserver()
         fetchProfile()
@@ -58,6 +62,7 @@ final class ProfileViewModel {
     }
 
     // MARK: - Private methods
+    
     func registerProfileLastChangeTimeObserver() {
         profileObservation = userDefaults.observe(
             \.profileLastChangeTime,

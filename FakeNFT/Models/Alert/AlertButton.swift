@@ -7,7 +7,6 @@
 
 import UIKit
 
-// MARK: - AlertButton
 struct AlertButton<T> {
 
     let text: String

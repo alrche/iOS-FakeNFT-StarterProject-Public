@@ -8,9 +8,11 @@
 import UIKit
 
 // MARK: - EditProfileViewController
+
 final class EditProfileViewController: UIViewController {
 
     // MARK: - Private properties
+
     private let editProfileView: EditProfileView
     private let viewModel: ProfileViewModel
 
@@ -26,6 +28,7 @@ final class EditProfileViewController: UIViewController {
     }
 
     // MARK: - Initializers
+
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         self.editProfileView = EditProfileView(viewModel: viewModel)
@@ -38,6 +41,7 @@ final class EditProfileViewController: UIViewController {
     }
 
     // MARK: - Overridden methods
+
     override func loadView() {
         view = editProfileView
     }
@@ -49,6 +53,7 @@ final class EditProfileViewController: UIViewController {
     }
 
     // MARK: - Private methods
+
     private func configureView() {
         editProfileView.closeButton.addTarget(
             self,
@@ -97,6 +102,7 @@ final class EditProfileViewController: UIViewController {
 }
 
 // MARK: - UIAdaptivePresentationControllerDelegate
+
 extension EditProfileViewController: UIAdaptivePresentationControllerDelegate {
 
     func presentationControllerShouldDismiss(

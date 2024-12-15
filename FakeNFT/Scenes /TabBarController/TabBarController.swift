@@ -1,11 +1,13 @@
 import UIKit
 
 // MARK: - TabBarController
+
 final class TabBarController: UITabBarController {
 
     var servicesAssembly: ServicesAssembly!
 
     // MARK: - Private Properties
+
     private var catalogNavigationController: UINavigationController {
         let vc = CatalogViewController()
         let navVC = UINavigationController(rootViewController: vc)
@@ -61,6 +63,7 @@ final class TabBarController: UITabBarController {
     }
 
     // MARK: - Overridden methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -75,6 +78,7 @@ final class TabBarController: UITabBarController {
     }
 
     // MARK: - Private Methods
+    
     private func setupUI() {
         tabBar.backgroundColor = A.Colors.whiteDynamic.color
         tabBar.barTintColor = A.Colors.whiteDynamic.color

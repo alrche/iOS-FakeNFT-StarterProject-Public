@@ -9,9 +9,11 @@ import UIKit
 import Kingfisher
 
 // MARK: - EditProfileView
+
 final class EditProfileView: UIView {
 
     // MARK: - Public properties
+
     var editProfileModel: EditProfileModel {
         EditProfileModel(
             name: nameTextField.text ?? "",
@@ -43,6 +45,7 @@ final class EditProfileView: UIView {
     }()
 
     // MARK: - Private properties
+
     private enum Constants {
         static let cornerRadius: CGFloat = 12
         static let textFieldMaxLength: Int = 100
@@ -134,6 +137,7 @@ final class EditProfileView: UIView {
     }()
 
     // MARK: - Initializers
+
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -154,12 +158,14 @@ final class EditProfileView: UIView {
     }
 
     // MARK: - Public methods
+
     func hideChangeAvatarView() {
         self.changeAvatarView.isHidden = true
         self.imageView.isUserInteractionEnabled = false
     }
 
     // MARK: - Layout
+
     private var scrollViewConstraints: [NSLayoutConstraint] {
         [
             scrollView.contentLayoutGuide.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
@@ -268,6 +274,7 @@ final class EditProfileView: UIView {
     }
 
     // MARK: - Private methods
+
     @objc private func textFieldChanged(_ textField: UITextField) {
         trimExtraCharacters(textField: textField)
     }
@@ -333,6 +340,7 @@ final class EditProfileView: UIView {
 }
 
 // MARK: - UITextFieldDelegate
+
 extension EditProfileView: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -343,6 +351,7 @@ extension EditProfileView: UITextFieldDelegate {
 }
 
 // MARK: - UITextViewDelegate
+
 extension EditProfileView: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {

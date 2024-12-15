@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - AlertTextField
 struct AlertTextField {
 
     let placeholder: String

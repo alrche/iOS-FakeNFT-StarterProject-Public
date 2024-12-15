@@ -7,7 +7,6 @@
 
 import UIKit
 
-// MARK: - AlertModel
 struct AlertModel {
 
     let title: String
@@ -47,41 +46,6 @@ struct AlertModel {
                     text: L.Alert.no,
                     style: .destructive,
                     completion: cancelCompletion
-                )
-            ],
-            preferredStyle: .alert
-        )
-    }
-    static func profileFetchError(
-        message: String,
-        tryAgainCompletion: @escaping () -> Void
-    ) -> AlertModel {
-        AlertModel(
-            title: L.Profile.Alert.fetchError,
-            message: message,
-            buttons: [
-                AlertButton(
-                    text: L.Alert.tryAgain,
-                    style: .default,
-                    completion: tryAgainCompletion
-                )
-            ],
-            preferredStyle: .alert
-        )
-    }
-
-    static func profileEditError(
-        message: String,
-        okCompletion: @escaping () -> Void
-    ) -> AlertModel {
-        AlertModel(
-            title: L.Profile.Alert.editError,
-            message: message,
-            buttons: [
-                AlertButton(
-                    text: L.Alert.ok,
-                    style: .default,
-                    completion: okCompletion
                 )
             ],
             preferredStyle: .alert

@@ -77,6 +77,7 @@
 		4088ACDE2D0DC4D2005E5EC6 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088ACDD2D0DC4D2005E5EC6 /* StatisticViewController.swift */; };
 		4088ACE02D0DCCF1005E5EC6 /* AlertTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088ACDF2D0DCCF1005E5EC6 /* AlertTextField.swift */; };
 		4088ACE22D0DCD0B005E5EC6 /* AlertWithTextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088ACE12D0DCD0B005E5EC6 /* AlertWithTextFieldModel.swift */; };
+		4089DCD22D0EF01700B6EA3A /* AlertModel+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4089DCD12D0EF01700B6EA3A /* AlertModel+Profile.swift */; };
 		40CA15EC2D09E5FD00FE1213 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F6806A129CBBAF200B4F915 /* LaunchScreen.storyboard */; };
 		4B25FD0EC4EF35734AD0229B /* Pods_FakeNFTTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB16B008CA89F760FAAAF7F /* Pods_FakeNFTTests.framework */; };
 		558E39E72C68CE0A00FB86AC /* NftService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558E39E62C68CE0900FB86AC /* NftService.swift */; };
@@ -180,6 +181,7 @@
 		4088ACDD2D0DC4D2005E5EC6 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StatisticViewController.swift; path = "FakeNFT/Scenes /StatisticViewController.swift"; sourceTree = SOURCE_ROOT; };
 		4088ACDF2D0DCCF1005E5EC6 /* AlertTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTextField.swift; sourceTree = "<group>"; };
 		4088ACE12D0DCD0B005E5EC6 /* AlertWithTextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWithTextFieldModel.swift; sourceTree = "<group>"; };
+		4089DCD12D0EF01700B6EA3A /* AlertModel+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertModel+Profile.swift"; sourceTree = "<group>"; };
 		543F9B3AC0A71170097A8254 /* Pods-FakeNFT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FakeNFT.release.xcconfig"; path = "Target Support Files/Pods-FakeNFT/Pods-FakeNFT.release.xcconfig"; sourceTree = "<group>"; };
 		558E39E62C68CE0900FB86AC /* NftService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftService.swift; sourceTree = "<group>"; };
 		6BFFA881396DA7CA886CD95A /* Pods_FakeNFT_FakeNFTUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FakeNFT_FakeNFTUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -487,6 +489,7 @@
 			children = (
 				4088AC982D0DAC4A005E5EC6 /* AlertButton.swift */,
 				4088AC9A2D0DAC72005E5EC6 /* AlertModel.swift */,
+				4089DCD12D0EF01700B6EA3A /* AlertModel+Profile.swift */,
 				4088ACDF2D0DCCF1005E5EC6 /* AlertTextField.swift */,
 				4088ACE12D0DCD0B005E5EC6 /* AlertWithTextFieldModel.swift */,
 			);
@@ -914,6 +917,7 @@
 				4088ACB92D0DB7EB005E5EC6 /* WebView.swift in Sources */,
 				0C79EE682A76DE0900EE90EA /* NftDetailPresenter.swift in Sources */,
 				4088ACDE2D0DC4D2005E5EC6 /* StatisticViewController.swift in Sources */,
+				4089DCD22D0EF01700B6EA3A /* AlertModel+Profile.swift in Sources */,
 				4088ACD42D0DBB61005E5EC6 /* EditProfileStackView.swift in Sources */,
 				3F68069B29CBBAF100B4F915 /* ProductDetailsTableViewController.swift in Sources */,
 				4088AC9E2D0DADB8005E5EC6 /* String+Extensions.swift in Sources */,

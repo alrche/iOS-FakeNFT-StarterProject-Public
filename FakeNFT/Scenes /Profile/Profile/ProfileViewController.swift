@@ -8,9 +8,11 @@
 import UIKit
 
 // MARK: - ProfileViewController
+
 final class ProfileViewController: UIViewController {
 
     // MARK: - Private properties
+
     private let profileView: ProfileView
     private let viewModel: ProfileViewModel
     private var editButton: UIBarButtonItem? {
@@ -18,6 +20,7 @@ final class ProfileViewController: UIViewController {
     }
 
     // MARK: - Initializers
+
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         self.profileView = ProfileView(viewModel: viewModel)
@@ -29,6 +32,7 @@ final class ProfileViewController: UIViewController {
     }
 
     // MARK: - Overridden methods
+
     override func loadView() {
         view = profileView
     }
@@ -42,6 +46,7 @@ final class ProfileViewController: UIViewController {
     }
 
     // MARK: - Private methods
+    
     private func bind() {
         viewModel.onProfileInfoChanged = { [weak self] in
             guard let self else { return }
@@ -54,7 +59,7 @@ final class ProfileViewController: UIViewController {
         viewModel.onFetchError = { [weak self] error in
             guard let self else { return }
             DispatchQueue.main.async {
-                AlertPresenter.show(in: self, model: .profileFetchError(message: error) {
+                AlertPresenter.show(in: self, model: AlertModelPlusProfile.profileFetchError(message: error) {
                     self.viewModel.fetchProfile()
                 })
             }
@@ -62,7 +67,7 @@ final class ProfileViewController: UIViewController {
         viewModel.onEditError = { [weak self] error in
             guard let self else { return }
             DispatchQueue.main.async {
-                AlertPresenter.show(in: self, model: .profileEditError(message: error) {
+                AlertPresenter.show(in: self, model: AlertModelPlusProfile.profileEditError(message: error) {
                     self.viewModel.fetchProfile()
                 })
             }

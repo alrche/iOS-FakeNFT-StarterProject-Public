@@ -9,9 +9,11 @@ import UIKit
 import WebKit
 
 // MARK: - WebViewController
+
 final class WebViewController: UIViewController {
     
     // MARK: - Private properties
+
     private let webViewModel: WebViewModel
     private let url: URL
     private var estimatedProgressObservation: NSKeyValueObservation?
@@ -20,6 +22,7 @@ final class WebViewController: UIViewController {
     }
     
     // MARK: - Initializers
+
     init(webViewModel: WebViewModel, url: URL) {
         self.webViewModel = webViewModel
         self.url = url
@@ -31,6 +34,7 @@ final class WebViewController: UIViewController {
     }
     
     // MARK: - Overridden methods
+
     override func loadView() {
         view = webView
     }
@@ -43,6 +47,7 @@ final class WebViewController: UIViewController {
     }
     
     // MARK: - Private  methods
+    
     private func bind() {
         webViewModel.onProgressChange = { [weak self] progress in
             self?.setProgressValue(progress)

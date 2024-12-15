@@ -8,9 +8,11 @@
 import UIKit
 
 // MARK: - EditProfileStackView
+
 final class EditProfileStackView: UIStackView {
 
     // MARK: - Initializers
+    
     init(spacing: CGFloat, arrangedSubviews: [UIView]) {
         super.init(frame: .zero)
         self.spacing = spacing

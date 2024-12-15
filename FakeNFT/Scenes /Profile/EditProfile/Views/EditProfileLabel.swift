@@ -8,9 +8,11 @@
 import UIKit
 
 // MARK: - EditProfileLabel
+
 final class EditProfileLabel: UILabel {
 
     // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         font = .Bold.medium

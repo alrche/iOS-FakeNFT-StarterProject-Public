@@ -9,9 +9,11 @@ import UIKit
 import WebKit
 
 // MARK: - WebView
+
 final class WebView: UIView {
     
     // MARK: - Public properties
+
     var webView: WKWebView = {
         let webView = WKWebView()
         webView.backgroundColor = A.Colors.whiteDynamic.color
@@ -25,6 +27,7 @@ final class WebView: UIView {
     }()
     
     // MARK: - Private properties
+
     private enum Constants {
         static let backButtonWidthAndHeight: CGFloat = 42
         enum CloseButton {
@@ -44,6 +47,7 @@ final class WebView: UIView {
     }()
     
     // MARK: - Initializers
+
     init(_ backButtonAction: @escaping () -> Void) {
         self.backButtonAction = backButtonAction
         
@@ -56,6 +60,7 @@ final class WebView: UIView {
     }
     
     // MARK: - Private methods
+    
     private func setupLayout() {
         backgroundColor = A.Colors.whiteDynamic.color
         

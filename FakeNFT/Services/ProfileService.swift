@@ -8,9 +8,11 @@
 import Foundation
 
 // MARK: - ProfileService
+
 struct ProfileService {
 
     // MARK: - Public methods
+
     static func fetchProfile(completion: @escaping (Result<ProfileModel, Error>) -> Void) {
         assert(Thread.isMainThread)
         let request = GetProfileRequest()
@@ -43,6 +45,7 @@ struct ProfileService {
     }
 
     // MARK: - Private methods
+    
     private static func updateProfileIfNeeded(profileModel: ProfileModel) {
         let userDefaults = UserDefaults.standard
         if userDefaults.profile != profileModel {
