@@ -33,20 +33,20 @@
 
 ## Модуль 2:
 ### Экран Мои NFT
-- UI (est: 6 h, fact: X h):
-    - Ячейка NFT (иконка, название, автор, цена)`TableViewCell` (est: 3 h, fact: X h);
-    - Таблица, в которой лежат ячейки NFT `TableView` (est: 2 h, fact: X h);
-    - `NavBar` с кнопками `Back`, `Sort` и лейблом `My NFT` (est: 1 h, fact: X h).
-- Сеть (est: 5 h, fact: X h):
-    - Загрузка списка NFT (est: 5 h, fact: X h);
-- Сортировка (est: 5 h, fact: X h):
-    - Логика сортировки и сохранение способа сортировки (est: 4 h, fact: X h);
-    - `ActionSheet` (est: 1 h, fact: X h).
-- Пустой экран (est: 2 h, fact: X h):
-    - UI (пустой экран с лейблом и кнопкой `Back` в `NavBar` (est: 1 h, fact: X h);
-    - Логика показа пустого экрана (est: 1 h, fact: X h).
+- UI (est: 6 h, fact: 6 h):
+    - Ячейка NFT (иконка, название, автор, цена)`TableViewCell` (est: 3 h, fact: 3 h);
+    - Таблица, в которой лежат ячейки NFT `TableView` (est: 2 h, fact: 2 h);
+    - `NavBar` с кнопками `Back`, `Sort` и лейблом `My NFT` (est: 1 h, fact: 1 h).
+- Сеть (est: 5 h, fact: 6 h):
+    - Загрузка списка NFT (est: 5 h, fact: 6 h);
+- Сортировка (est: 5 h, fact: 5 h):
+    - Логика сортировки и сохранение способа сортировки (est: 4 h, fact: 4 h);
+    - `ActionSheet` (est: 1 h, fact: 1 h).
+- Пустой экран (est: 2 h, fact: 1.5 h):
+    - UI (пустой экран с лейблом и кнопкой `Back` в `NavBar` (est: 1 h, fact: 0.5 h);
+    - Логика показа пустого экрана (est: 1 h, fact: 1 h).
     
-`Total:` est: 18 h, fact: X h.
+`Total:` est: 18 h, fact: 18.5 h.
 
 ## Модуль 3:
 ### Экран Избранные NFT
