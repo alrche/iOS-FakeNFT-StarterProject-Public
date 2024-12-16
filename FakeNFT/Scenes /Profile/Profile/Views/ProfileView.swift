@@ -13,6 +13,17 @@ import SkeletonView
 
 final class ProfileView: UIView {
 
+    // MARK: - Public properties
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = A.Colors.whiteDynamic.color
+        tableView.tableFooterView = UIView()
+        tableView.isScrollEnabled = false
+        tableView.register(ProfileTableViewCell.self)
+        return tableView
+    }()
+
     // MARK: - Private properties
 
     private enum Constants {
@@ -104,16 +115,6 @@ final class ProfileView: UIView {
         return label
     }()
 
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = A.Colors.whiteDynamic.color
-        tableView.tableFooterView = UIView()
-        tableView.isScrollEnabled = false
-        tableView.register(ProfileTableViewCell.self)
-        return tableView
-    }()
-
     private lazy var tableViewHeightAnchor = {
         self.tableView.heightAnchor.constraint(equalToConstant: 0)
     }()
@@ -125,8 +126,6 @@ final class ProfileView: UIView {
         super.init(frame: .zero)
         setupLayout()
         setupUI()
-        tableView.dataSource = self
-        tableView.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -289,32 +288,6 @@ final class ProfileView: UIView {
             websiteLabelConstraints +
             tableViewConstraints
         )
-    }
-
-}
-
-// MARK: - UITableViewDataSource
-
-extension ProfileView: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.cells.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: ProfileTableViewCell = tableView.dequeueReusableCell()
-        cell.configCell(label: viewModel.cells[indexPath.row].name)
-        return cell
-    }
-
-}
-
-// MARK: - UITableViewDelegate
-
-extension ProfileView: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        Constants.TableView.height
     }
 
 }

@@ -35,7 +35,7 @@ final class TabBarController: UITabBarController {
     }
 
     private var profileNavigationController: UINavigationController {
-        let navigationController = UINavigationController()
+        let navigationController = ProfileNavigationController()
         let viewModel = ProfileViewModel()
         let viewController = ProfileViewController(viewModel: viewModel)
 

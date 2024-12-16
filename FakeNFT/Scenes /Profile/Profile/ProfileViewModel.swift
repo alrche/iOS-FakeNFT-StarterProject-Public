@@ -31,31 +31,32 @@ final class ProfileViewModel {
 
     // MARK: - Private properties
 
-    private var profileObservation: NSKeyValueObservation?
+    private let profileService: ProfileServiceProtocol
     private var userDefaults: UserDefaults {
         UserDefaults.standard
     }
 
-    // MARK: - Public methods
+    // MARK: - Initializers
 
-    func viewDidLoad() {
-        registerProfileLastChangeTimeObserver()
-        fetchProfile()
+    init(profileService: ProfileServiceProtocol = ProfileService()) {
+        self.profileService = profileService
     }
 
+    // MARK: - Public methods
+
     func fetchProfile() {
-        ProfileService.fetchProfile { [weak self] result in
+        profileService.fetchProfile { [weak self] result in
             switch result {
-            case .success: break
+            case .success(let model): self?.updateProfileIfNeeded(profileModel: model)
             case .failure(let error): self?.onFetchError?(error.localizedDescription)
             }
         }
     }
 
     func editProfile(editProfileModel: EditProfileModel) {
-        ProfileService.editProfile(editProfileModel) { [weak self] result in
+        profileService.editProfile(editProfileModel) { [weak self] result in
             switch result {
-            case .success: break
+            case .success(let model): self?.updateProfileIfNeeded(profileModel: model)
             case .failure(let error): self?.onEditError?(error.localizedDescription)
             }
         }
@@ -63,14 +64,10 @@ final class ProfileViewModel {
 
     // MARK: - Private methods
     
-    func registerProfileLastChangeTimeObserver() {
-        profileObservation = userDefaults.observe(
-            \.profileLastChangeTime,
-             options: []
-        ) { [weak self] _, _ in
-            guard let self else { return }
-            self.onProfileInfoChanged?()
-        }
+    private func updateProfileIfNeeded(profileModel: ProfileModel) {
+        guard userDefaults.profile != profileModel else { return }
+        userDefaults.profile = profileModel
+        onProfileInfoChanged?()
     }
 
 }

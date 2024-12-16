@@ -10,16 +10,7 @@ import Foundation
 extension UserDefaults {
 
     private enum Keys: String {
-        case profile, profileLastChangeTime
-    }
-
-    @objc dynamic var profileLastChangeTime: Int {
-        get {
-            integer(forKey: Keys.profileLastChangeTime.rawValue)
-        }
-        set {
-            setValue(newValue, forKey: Keys.profileLastChangeTime.rawValue)
-        }
+        case profile, sortType
     }
 
     var profile: ProfileModel? {
@@ -36,6 +27,21 @@ extension UserDefaults {
                 return
             }
             set(data, forKey: Keys.profile.rawValue)
+        }
+    }
+
+    var sortType: SortType {
+        get {
+            guard
+                let sortTypeString = string(forKey: Keys.sortType.rawValue),
+                let sortType = SortType(rawValue: sortTypeString)
+            else {
+                return .byRating
+            }
+            return sortType
+        }
+        set {
+            setValue(newValue.rawValue, forKey: Keys.sortType.rawValue)
         }
     }
 

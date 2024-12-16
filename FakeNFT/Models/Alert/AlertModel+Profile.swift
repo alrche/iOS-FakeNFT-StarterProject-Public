@@ -44,4 +44,19 @@ struct AlertModelPlusProfile {
             preferredStyle: .alert
         )
     }
+
+    static func myNFTLoadError(message: String) -> AlertModel {
+        AlertModel(
+            title: L.Profile.MyNFT.Alert.fetchError,
+            message: message,
+            buttons: [
+                AlertButton(
+                    text: L.Alert.ok,
+                    style: .default,
+                    completion: {}
+                )
+            ],
+            preferredStyle: .alert
+        )
+    }
 }

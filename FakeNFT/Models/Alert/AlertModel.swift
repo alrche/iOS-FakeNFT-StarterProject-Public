@@ -52,4 +52,38 @@ struct AlertModel {
         )
     }
 
+    static func sortActionSheet(
+        priceCompletion: @escaping () -> Void,
+        ratingCompletion: @escaping () -> Void,
+        nameCompletion: @escaping () -> Void
+    ) -> AlertModel {
+        AlertModel(
+            title: L.Alert.Sort.title,
+            message: nil,
+            buttons: [
+                AlertButton(
+                    text: L.Alert.Sort.price,
+                    style: .default,
+                    completion: priceCompletion
+                ),
+                AlertButton(
+                    text: L.Alert.Sort.rating,
+                    style: .default,
+                    completion: ratingCompletion
+                ),
+                AlertButton(
+                    text: L.Alert.Sort.name,
+                    style: .default,
+                    completion: nameCompletion
+                ),
+                AlertButton(
+                    text: L.Alert.close,
+                    style: .cancel,
+                    completion: {}
+                )
+            ],
+            preferredStyle: .actionSheet
+        )
+    }
+
 }
