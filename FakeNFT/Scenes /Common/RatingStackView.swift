@@ -8,12 +8,15 @@
 import UIKit
 
 // MARK: - RatingStackView
+
 final class RatingStackView: UIStackView {
 
     // MARK: - Private properties
+
     private var rating: Int = 0
 
     // MARK: - Initializers
+
     init(rating: Int = 0) {
         super.init(frame: .zero)
         prepareRating(rating)
@@ -41,6 +44,7 @@ final class RatingStackView: UIStackView {
     }
 
     // MARK: - Public methods
+
     func setRating(rating: Int) {
         prepareRating(rating)
         for (index, subview) in subviews.enumerated() {
@@ -52,6 +56,7 @@ final class RatingStackView: UIStackView {
     }
 
     // MARK: - Private methods
+    
     private func prepareRating(_ rating: Int) {
         switch rating {
         case 5...:
