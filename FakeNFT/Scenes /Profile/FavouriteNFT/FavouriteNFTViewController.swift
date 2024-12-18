@@ -112,6 +112,7 @@ final class FavouriteNFTViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDataSource
+
 extension FavouriteNFTViewController: SkeletonCollectionViewDataSource {
     func collectionSkeletonView(
         _ skeletonView: UICollectionView,
@@ -142,6 +143,7 @@ extension FavouriteNFTViewController: SkeletonCollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
+
 extension FavouriteNFTViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
@@ -179,6 +181,7 @@ extension FavouriteNFTViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - FavouriteNFTCollectionViewCellDelegate
+
 extension FavouriteNFTViewController: FavouriteNFTCollectionViewCellDelegate {
 
     func didTapOnLikeButton(_ cell: FavouriteNFTCollectionViewCell) {
