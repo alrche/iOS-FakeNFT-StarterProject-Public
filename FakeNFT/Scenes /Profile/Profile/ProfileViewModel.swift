@@ -13,12 +13,16 @@ final class ProfileViewModel {
 
     // MARK: - Public properties
 
-    var onProfileInfoChanged: (() -> Void)?
+    var onProfileInfoChanged: (() -> Void)? {
+        didSet {
+            storageService.onProfileInfoChanged = onProfileInfoChanged
+        }
+    }
     var onFetchError: ((String) -> Void)?
     var onEditError: ((String) -> Void)?
 
     var model: ProfileModel? {
-        userDefaults.profile
+        storageService.profile
     }
 
     var cells: [ProfileTableViewCells] {
@@ -32,13 +36,16 @@ final class ProfileViewModel {
     // MARK: - Private properties
 
     private let profileService: ProfileServiceProtocol
-    private var userDefaults: UserDefaults {
-        UserDefaults.standard
-    }
+    private let storageService: StorageService
+    private var profileObservation: NSKeyValueObservation?
 
     // MARK: - Initializers
 
-    init(profileService: ProfileServiceProtocol = ProfileService()) {
+    init(
+        profileService: ProfileServiceProtocol = ProfileService(),
+        storageService: StorageService = StorageService.shared
+    ) {
+        self.storageService = storageService
         self.profileService = profileService
     }
 
@@ -65,8 +72,8 @@ final class ProfileViewModel {
     // MARK: - Private methods
     
     private func updateProfileIfNeeded(profileModel: ProfileModel) {
-        guard userDefaults.profile != profileModel else { return }
-        userDefaults.profile = profileModel
+        guard storageService.profile != profileModel else { return }
+        storageService.profile = profileModel
         onProfileInfoChanged?()
     }
 

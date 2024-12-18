@@ -50,17 +50,17 @@
 
 ## Модуль 3:
 ### Экран Избранные NFT
-- UI (est: 5 h, fact: X h):
-    - Ячейка NFT, добавленная в избранное (иконка, сердечко, название, рейтинг, цена в ETH) `CollectionViewCell` (est: 2 h, fact: X h);
-    - Коллекция NFT, доабвленных в избранное `CollectionView` (est: 2 h, fact: X h);
-    - `NavBar` с кнопкой `Back` и лейблом `Favourite NFT` (est: 1 h, fact: X h).
-- Сеть (est: 10 h, fact: X h):
-    - Загрузка списка NFT (est: 5 h, fact: X h);
-    - Лайк (est: 5 h, fact: X h).
-- Пустой экран (est: 2 h, fact: X h):
-    - UI (пустой экран с лейблом и кнопкой `Back` в `NavBar` (est: 1 h, fact: X h);
-    - Логика показа пустого экрана (est: 1 h, fact: X h).
+- UI (est: 5 h, fact: 4.5 h):
+    - Ячейка NFT, добавленная в избранное (иконка, сердечко, название, рейтинг, цена в ETH) `CollectionViewCell` (est: 2 h, fact: 2 h);
+    - Коллекция NFT, доабвленных в избранное `CollectionView` (est: 2 h, fact: 2 h);
+    - `NavBar` с кнопкой `Back` и лейблом `Favourite NFT` (est: 1 h, fact: 0.5 h).
+- Сеть (est: 10 h, fact: 10 h):
+    - Загрузка списка NFT (est: 5 h, fact: 5 h);
+    - Лайк (est: 5 h, fact: 5 h).
+- Пустой экран (est: 2 h, fact: 1.5 h):
+    - UI (пустой экран с лейблом и кнопкой `Back` в `NavBar` (est: 1 h, fact: 0.5 h);
+    - Логика показа пустого экрана (est: 1 h, fact: 1 h).
 
-`Total:` est: 17 h, fact: X h.
+`Total:` est: 17 h, fact: 16 h.
     
-## `Total:` est: 58 h, fact: X h.
+## `Total:` est: 58 h, fact: 54.5 h.

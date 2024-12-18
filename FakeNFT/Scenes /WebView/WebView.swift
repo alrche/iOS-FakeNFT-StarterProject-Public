@@ -8,12 +8,19 @@
 import UIKit
 import WebKit
 
+// MARK: - WebViewDelegate
+
+protocol WebViewDelegate: AnyObject {
+    func didTapCloseButton()
+}
+
 // MARK: - WebView
 
 final class WebView: UIView {
     
     // MARK: - Public properties
-
+    
+    weak var delegate: WebViewDelegate?
     var webView: WKWebView = {
         let webView = WKWebView()
         webView.backgroundColor = A.Colors.whiteDynamic.color
@@ -29,14 +36,13 @@ final class WebView: UIView {
     // MARK: - Private properties
 
     private enum Constants {
-        static let backButtonWidthAndHeight: CGFloat = 42
         enum CloseButton {
             static let inset: CGFloat = 4
             static let widthAndHeight: CGFloat = 42
         }
     }
-    private var backButtonAction: () -> Void
-    
+    private let presentation: WebViewPresentation
+
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = A.Colors.whiteDynamic.color
@@ -48,9 +54,8 @@ final class WebView: UIView {
     
     // MARK: - Initializers
 
-    init(_ backButtonAction: @escaping () -> Void) {
-        self.backButtonAction = backButtonAction
-        
+    init(presentation: WebViewPresentation) {
+        self.presentation = presentation
         super.init(frame: .zero)
         setupLayout()
     }
@@ -63,48 +68,58 @@ final class WebView: UIView {
     
     private func setupLayout() {
         backgroundColor = A.Colors.whiteDynamic.color
-        
         addSubview(webView)
-        addSubview(closeButton)
         addSubview(progressView)
         
-        [webView, progressView, closeButton].forEach {
+        [webView, progressView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
+
+        var progressViewTopAnchor: NSLayoutConstraint
+        switch presentation {
+        case .modal:
+            addSubview(closeButton)
+            closeButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                closeButton.topAnchor.constraint(
+                    equalTo: safeAreaLayoutGuide.topAnchor,
+                    constant: Constants.CloseButton.inset
+                ),
+                safeAreaLayoutGuide.trailingAnchor.constraint(
+                    equalTo: closeButton.trailingAnchor,
+                    constant: Constants.CloseButton.inset
+                ),
+                closeButton.widthAnchor.constraint(
+                    equalToConstant: Constants.CloseButton.widthAndHeight
+                ),
+                closeButton.heightAnchor.constraint(
+                    equalToConstant: Constants.CloseButton.widthAndHeight
+                )
+            ])
+            progressViewTopAnchor = progressView.topAnchor.constraint(equalTo: closeButton.bottomAnchor)
+        case .navigation:
+            progressViewTopAnchor = progressView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+        }
+
         NSLayoutConstraint.activate([
-            webView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            webView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             webView.bottomAnchor.constraint(equalTo: bottomAnchor),
             webView.topAnchor.constraint(equalTo: progressView.bottomAnchor)
         ])
-        
+
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: Constants.CloseButton.inset
-            ),
-            safeAreaLayoutGuide.trailingAnchor.constraint(
-                equalTo: closeButton.trailingAnchor,
-                constant: Constants.CloseButton.inset
-            ),
-            closeButton.widthAnchor.constraint(
-                equalToConstant: Constants.CloseButton.widthAndHeight
-            ),
-            closeButton.heightAnchor.constraint(
-                equalToConstant: Constants.CloseButton.widthAndHeight
-            )
-        ])
-        
-        NSLayoutConstraint.activate([
-            progressView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            progressView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            progressView.topAnchor.constraint(equalTo: closeButton.bottomAnchor)
+            progressView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            progressView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            progressViewTopAnchor
         ])
     }
     
     @objc private func onTap() {
-        backButtonAction()
+        switch presentation {
+        case .modal: delegate?.didTapCloseButton()
+        case .navigation: break
+        }
     }
     
 }
