@@ -92,6 +92,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         label.font = .Bold.small
         label.textColor = A.Colors.blackDynamic.color
         label.text = Constants.skeletonText
+        label.skeletonCornerRadius = 12
         return label
     }()
     
@@ -101,6 +102,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         label.font = .Regular.small
         label.textColor = A.Colors.blackDynamic.color
         label.text = L.Cart.price
+        label.skeletonCornerRadius = 12
         return label
     }()
     
@@ -109,6 +111,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         label.font = .Bold.small
         label.textColor = A.Colors.blackDynamic.color
         label.text = Constants.skeletonText
+        label.skeletonCornerRadius = 12
         return label
     }()
     
