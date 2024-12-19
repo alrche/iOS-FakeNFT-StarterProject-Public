@@ -22,16 +22,17 @@ final class TabBarController: UITabBarController {
     }
 
     private var cartNavigationController: UINavigationController {
+        let navigationController = CartNavigationViewController()
         let vc = CartViewController()
-        let navVC = UINavigationController(rootViewController: vc)
+        navigationController.viewControllers = [vc]
 
-        navVC.tabBarItem = UITabBarItem(
+        navigationController.tabBarItem = UITabBarItem(
             title: L.Cart.title,
             image: A.Icons.TabBar.cart.image,
             selectedImage: nil
         )
 
-        return navVC
+        return navigationController
     }
 
     private var profileNavigationController: UINavigationController {
@@ -78,7 +79,7 @@ final class TabBarController: UITabBarController {
     }
 
     // MARK: - Private Methods
-    
+
     private func setupUI() {
         tabBar.backgroundColor = A.Colors.whiteDynamic.color
         tabBar.barTintColor = A.Colors.whiteDynamic.color
