@@ -31,6 +31,8 @@ public enum L {
     /// Да
     public static let yes = L.tr("Localizable", "alert.yes", fallback: "Да")
     public enum Sort {
+      /// По количеству NFT
+      public static let amount = L.tr("Localizable", "alert.sort.amount", fallback: "По количеству NFT")
       /// По названию
       public static let name = L.tr("Localizable", "alert.sort.name", fallback: "По названию")
       /// По цене
@@ -79,6 +81,14 @@ public enum L {
     public static let userAgreementStart = L.tr("Localizable", "cart.userAgreementStart", fallback: "Совершая покупку, вы соглашаетесь с условиями")
   }
   public enum Catalog {
+    /// Добавить в корзину
+    public static let addToCart = L.tr("Localizable", "catalog.addToCart", fallback: "Добавить в корзину")
+    /// Автор коллекции:
+    public static let collectionAuthor = L.tr("Localizable", "catalog.collectionAuthor", fallback: "Автор коллекции:")
+    /// ETH
+    public static let eth = L.tr("Localizable", "catalog.ETH", fallback: "ETH")
+    /// Открыть Nft
+    public static let openNft = L.tr("Localizable", "catalog.openNft", fallback: "Открыть Nft")
     /// Каталог
     public static let title = L.tr("Localizable", "catalog.title", fallback: "Каталог")
   }
