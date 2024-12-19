@@ -7,6 +7,7 @@ target 'FakeNFT' do
 
   # Pods for FakeNFT
   pod 'SwiftGen', '~> 6.0'
+  pod 'SnapKit', '~> 5.0.1'
   pod 'SkeletonView'
 
   target 'FakeNFTTests' do
