@@ -17,6 +17,7 @@
 "alert.sort.price" = "По цене";
 "alert.sort.rating" = "По рейтингу";
 "alert.sort.name" = "По названию";
+"alert.sort.amount" = "По количеству NFT";
 
 "ptr" = "Потяните, чтобы обновить";
 
@@ -89,3 +90,7 @@
 "statistics.isEmpty" = "Тут пусто";
 
 "catalog.title" = "Каталог";
+"catalog.ETH" = "ETH";
+"catalog.openNft" = "Открыть Nft";
+"catalog.collectionAuthor" = "Автор коллекции:";
+"catalog.addToCart" = "Добавить в корзину";
