@@ -14,19 +14,10 @@ final class CartPayTableViewCell: UITableViewCell,ReuseIdentifying {
 
     private enum Constants {
         static let skeletonText = "             "
-        enum ImageView {
-            static let cornerRadius: CGFloat = 12
-            static let widthAndHeight: CGFloat = 108
-            static let maxRetryCount: Int = 2
-        }
         enum PayStackView {
             static let spacing: CGFloat = 2
             static let leadingInset: CGFloat = 20
             static let height: CGFloat = 42
-        }
-        enum PriceStackView {
-            static let spacing: CGFloat = 2
-            static let width: CGFloat = 100
         }
         enum ViewWithContent {
             static let inset: CGFloat = 16
@@ -63,6 +54,7 @@ final class CartPayTableViewCell: UITableViewCell,ReuseIdentifying {
         for subview in [nftCountLabel, totalPriceLabel] {
             stackView.addArrangedSubview(subview)
         }
+        stackView.skeletonCornerRadius = 12
         return stackView
     }()
     
@@ -71,12 +63,14 @@ final class CartPayTableViewCell: UITableViewCell,ReuseIdentifying {
         label.font = .Regular.small
         label.textColor = A.Colors.blackDynamic.color
         label.text = Constants.skeletonText
+        label.skeletonCornerRadius = 12
         return label
     }()
     private let totalPriceLabel: UILabel = {
         let label = UILabel()
         label.font = .Bold.small
         label.textColor = A.Colors.green.color
+        label.skeletonCornerRadius = 12
         return label
     }()
 
@@ -102,7 +96,6 @@ final class CartPayTableViewCell: UITableViewCell,ReuseIdentifying {
             .reduce(0.0) { $0 + $1.price }
         totalPriceLabel.text = "\(totalPrice) ETH"
     }
-
 
     private func setupUI() {
         contentView.addSubview(viewWithContent)
