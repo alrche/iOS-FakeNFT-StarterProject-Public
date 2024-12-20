@@ -16,7 +16,7 @@
 Скринкаст экранов приложения:
 - Каталог
 - Корзина
-- [Профиль](https://disk.yandex.ru/i/AnLWBFkm9TiE5Q)
+- [Профиль](https://disk.yandex.ru/i/84HdoEfbq88OdA)
 
 # Назначение и цели приложения
 
