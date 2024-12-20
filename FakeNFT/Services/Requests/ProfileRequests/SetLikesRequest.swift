@@ -38,7 +38,7 @@ struct SetLikesDtoObject: Dto {
 
     func asDictionary() -> [String : String] {
         [
-            CodingKeys.likes.rawValue: likes.isEmpty ? "" : likes.joined(separator:", ")
+            CodingKeys.likes.rawValue: likes.isEmpty ? "null" : likes.joined(separator:", ")
         ]
     }
 }
