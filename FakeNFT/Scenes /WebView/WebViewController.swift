@@ -14,19 +14,29 @@ final class WebViewController: UIViewController {
     
     // MARK: - Private properties
 
-    private let webViewModel: WebViewModel
+    private let webViewModel: WebViewModelProtocol
     private let url: URL
+    private let titleString: String?
     private var estimatedProgressObservation: NSKeyValueObservation?
-    private lazy var webView = WebView {
-        self.didTapCloseButton()
-    }
-    
+    private let webView: WebView
+    private let presentation: WebViewPresentation
+
     // MARK: - Initializers
 
-    init(webViewModel: WebViewModel, url: URL) {
+    init(
+        webViewModel: WebViewModelProtocol,
+        url: URL,
+        presentation: WebViewPresentation,
+        title: String? = nil
+    ) {
+        self.presentation = presentation
+        self.webView = WebView(presentation: presentation)
         self.webViewModel = webViewModel
         self.url = url
+        self.titleString = title
         super.init(nibName: nil, bundle: nil)
+        webView.delegate = self
+        hidesBottomBarWhenPushed = true
     }
     
     required init?(coder: NSCoder) {
@@ -43,10 +53,11 @@ final class WebViewController: UIViewController {
         super.viewDidLoad()
         registerEstimatedProgressObserver()
         bind()
+        configureNavigationBarIfNeeded()
         load(url: url)
     }
     
-    // MARK: - Private  methods
+    // MARK: - Private methods
     
     private func bind() {
         webViewModel.onProgressChange = { [weak self] progress in
@@ -80,9 +91,29 @@ final class WebViewController: UIViewController {
     private func setProgressHidden(_ isHidden: Bool) {
         webView.progressView.isHidden = isHidden
     }
-    
-    @objc private func didTapCloseButton() {
+
+    private func configureNavigationBarIfNeeded() {
+        guard presentation == .navigation else { return }
+        let leftButton = UIBarButtonItem(
+            image: A.Icons.back.image,
+            style: .plain,
+            target: self,
+            action: #selector(back)
+        )
+        navigationItem.setLeftBarButton(leftButton, animated: false)
+        navigationItem.title = titleString
+    }
+
+    @objc private func back() {
+        navigationController?.popViewController(animated: true)
+    }
+
+}
+
+// MARK: - WebViewController
+
+extension WebViewController: WebViewDelegate {
+    func didTapCloseButton() {
         dismiss(animated: true)
     }
-    
 }

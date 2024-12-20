@@ -20,6 +20,11 @@ protocol ProfileServiceProtocol {
         completion: @escaping (Result<NFTNetworkModel, Error>) -> Void
     )
     func getNFTs(completion: @escaping (Result<[NFTModel], Error>) -> Void)
+    func getFavouriteNFTs(completion: @escaping (Result<[FavouriteNFTModel], Error>) -> Void)
+    func setLikes(
+        _ likesModel: LikesModel,
+        completion: @escaping (Result<ProfileModel, Error>) -> Void
+    )
 }
 
 // MARK: - ProfileService
@@ -29,10 +34,15 @@ struct ProfileService: ProfileServiceProtocol {
     // MARK: - Private properties
     
     private let networkClient: NetworkClient
+    private let storageService: StorageService
 
     // MARK: - Initializers
 
-    init(networkClient: NetworkClient = DefaultNetworkClient()) {
+    init(
+        networkClient: NetworkClient = DefaultNetworkClient(),
+        storageService: StorageService = StorageService.shared
+    ) {
+        self.storageService = storageService
         self.networkClient = networkClient
     }
 
@@ -81,7 +91,7 @@ struct ProfileService: ProfileServiceProtocol {
     }
 
     func getNFTs(completion: @escaping (Result<[NFTModel], Error>) -> Void) {
-        guard let profile = UserDefaults.standard.profile else { return }
+        guard let profile = storageService.profile else { return }
         var nfts: [NFTModel?] = Array(repeating: nil, count: profile.nfts.count)
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue(label: "loading_nfts_queue")
@@ -114,6 +124,53 @@ struct ProfileService: ProfileServiceProtocol {
         }
         dispatchGroup.notify(queue: dispatchQueue) {
             completion(.success(nfts.compactMap { $0 }))
+        }
+    }
+
+    func getFavouriteNFTs(completion: @escaping (Result<[FavouriteNFTModel], Error>) -> Void) {
+        guard let profile = storageService.profile else { return }
+        var nfts: [FavouriteNFTModel?] = Array(repeating: nil, count: profile.likes.count)
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "loading_fav_nfts_queue")
+        for (index, nftId) in profile.likes.enumerated() {
+            dispatchGroup.enter()
+            getNFT(id: nftId) { result in
+                switch result {
+                case .success(let nftModel):
+                    dispatchQueue.async {
+                        nfts[index] = FavouriteNFTModel(
+                            id: nftModel.id,
+                            image: nftModel.images[0],
+                            // TODO: заменить на nftModel.name после фикса API
+                            name: self.getNameFromImage(nftModel.images[0]),
+                            rating: nftModel.rating,
+                            price: nftModel.price
+                        )
+                        dispatchGroup.leave()
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                    dispatchGroup.leave()
+                }
+            }
+        }
+        dispatchGroup.notify(queue: dispatchQueue) {
+            completion(.success(nfts.compactMap { $0 }))
+        }
+    }
+
+    func setLikes(
+        _ likesModel: LikesModel,
+        completion: @escaping (Result<ProfileModel, Error>) -> Void
+    ) {
+        let request = SetLikesRequest(model: likesModel)
+        networkClient.send(request: request, type: ProfileModel.self) { result in
+            switch result {
+            case .success(let model):
+                completion(.success(model))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 

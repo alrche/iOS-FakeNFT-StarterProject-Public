@@ -14,6 +14,7 @@ import SkeletonView
 final class ProfileView: UIView {
 
     // MARK: - Public properties
+    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
