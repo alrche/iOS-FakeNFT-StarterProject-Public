@@ -7,6 +7,7 @@ target 'FakeNFT' do
 
   # Pods for FakeNFT
   pod 'SwiftGen', '~> 6.0'
+  pod 'SkeletonView'
 
   target 'FakeNFTTests' do
     inherit! :search_paths

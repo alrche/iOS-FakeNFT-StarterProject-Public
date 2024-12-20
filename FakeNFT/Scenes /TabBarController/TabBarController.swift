@@ -1,13 +1,15 @@
 import UIKit
 
 // MARK: - TabBarController
+
 final class TabBarController: UITabBarController {
 
     var servicesAssembly: ServicesAssembly!
 
     // MARK: - Private Properties
+
     private var catalogNavigationController: UINavigationController {
-        let vc = ProfileViewController()
+        let vc = CatalogViewController()
         let navVC = UINavigationController(rootViewController: vc)
 
         navVC.tabBarItem = UITabBarItem(
@@ -20,7 +22,7 @@ final class TabBarController: UITabBarController {
     }
 
     private var cartNavigationController: UINavigationController {
-        let vc = ProfileViewController()
+        let vc = CartViewController()
         let navVC = UINavigationController(rootViewController: vc)
 
         navVC.tabBarItem = UITabBarItem(
@@ -33,8 +35,9 @@ final class TabBarController: UITabBarController {
     }
 
     private var profileNavigationController: UINavigationController {
-        let navigationController = UINavigationController()
-        let viewController = ProfileViewController()
+        let navigationController = ProfileNavigationController()
+        let viewModel = ProfileViewModel()
+        let viewController = ProfileViewController(viewModel: viewModel)
 
         navigationController.viewControllers = [viewController]
 
@@ -47,7 +50,7 @@ final class TabBarController: UITabBarController {
     }
 
     private var statisticNavigationController: UINavigationController {
-        let vc = ProfileViewController()
+        let vc = StatisticViewController()
         let navVC = UINavigationController(rootViewController: vc)
 
         navVC.tabBarItem = UITabBarItem(
@@ -60,6 +63,7 @@ final class TabBarController: UITabBarController {
     }
 
     // MARK: - Overridden methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,6 +78,7 @@ final class TabBarController: UITabBarController {
     }
 
     // MARK: - Private Methods
+    
     private func setupUI() {
         tabBar.backgroundColor = A.Colors.whiteDynamic.color
         tabBar.barTintColor = A.Colors.whiteDynamic.color
