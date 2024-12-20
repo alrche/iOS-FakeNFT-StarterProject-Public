@@ -70,6 +70,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         for subview in [nftNameLabel, ratingStackView, priceStackView] {
             stackView.addArrangedSubview(subview)
         }
+        stackView.skeletonCornerRadius = 12
         return stackView
     }()
     
@@ -81,6 +82,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         for subview in [priceTitleLabel, priceLabel] {
             stackView.addArrangedSubview(subview)
         }
+        stackView.skeletonCornerRadius = 12
         return stackView
     }()
     
@@ -181,11 +183,13 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
             viewWithContent.addSubview($0)
         }
         
-        [viewWithContent, nftImageView, infoStackView, priceStackView, ratingStackView,
-         nftNameLabel,priceTitleLabel, priceLabel, deleteButton
+        [viewWithContent, nftImageView, infoStackView, priceStackView,
+         deleteButton
         ].forEach {
             $0.isSkeletonable = true
         }
+       
+        
         self.isSkeletonable = true
         contentView.isSkeletonable = true
     }
