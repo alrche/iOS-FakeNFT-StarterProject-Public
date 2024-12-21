@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CartService {
+final class  CartService {
 
     // MARK: - Public methods
     static func fetchCart(completion: @escaping (Result<CartModel, Error>) -> Void) {
@@ -57,12 +57,13 @@ struct CartService {
             let dispatchQueue = DispatchQueue(label: "loading_nfts_queue")
             for (index, nftId) in cart.nfts.enumerated() {
                 dispatchGroup.enter()
-                getNFT(id: nftId) { result in
+                getNFT(id: nftId) { [weak self] result in
                     switch result {
                     case .success(_):
                             switch result {
                             case .success(let nftModel):
                                 dispatchQueue.async {
+                                    guard let self = self else {return}
                                     nfts[index] = CartNFTModel(image: nftModel.images[0],
                                                            name: self.getNameFromImage(nftModel.images[0]),
                                                            authorName: nftModel.name,
