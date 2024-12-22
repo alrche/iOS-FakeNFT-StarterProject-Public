@@ -34,7 +34,7 @@ final  class  CatalogTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addSubViews() {
+    private func addSubViews() {
         contentView.addSubview(topImage)
         contentView.addSubview(nameAndCountLabel)
         

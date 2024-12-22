@@ -19,8 +19,10 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     func fetchCollections(completion: @escaping () -> Void) {
         // Здесь будет запрос к сервису для загрузки данных
         // После загрузки данных обновим массив collections
-        guard let image = UIImage(named: "peach") else {return}
-        collections = [NFTRowModel(image: image, name: "Peach", count: 11), 
+        guard let image = UIImage(named: "peach") else {
+            return
+        }
+        collections = [NFTRowModel(image: image, name: "Peach", count: 11),
                        NFTRowModel(image: image, name: "Peach", count: 11),
                        NFTRowModel(image: image, name: "Peach", count: 11),
                        NFTRowModel(image: image, name: "Peach", count: 11),
