@@ -1,26 +1,40 @@
 import UIKit
 
 // MARK: - TabBarController
+
 final class TabBarController: UITabBarController {
 
     var servicesAssembly: ServicesAssembly!
-
+    
+    init(servicesAssembly: ServicesAssembly) {
+        self.servicesAssembly = servicesAssembly
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Private Properties
-    private var catalogNavigationController: UINavigationController {
-        let vc = ProfileViewController()
-        let navVC = UINavigationController(rootViewController: vc)
 
-        navVC.tabBarItem = UITabBarItem(
+    private var catalogNavigationController: UINavigationController {
+        let navigationController = UINavigationController()
+        let viewModel = CatalogViewModel()
+        let vc = CatalogViewController(servicesAssembly: servicesAssembly, viewModel: viewModel)
+        
+        navigationController.viewControllers = [vc]
+
+        navigationController.tabBarItem = UITabBarItem(
             title: L.Catalog.title,
             image: A.Icons.TabBar.catalog.image,
             selectedImage: nil
         )
 
-        return navVC
+        return navigationController
     }
 
     private var cartNavigationController: UINavigationController {
-        let vc = ProfileViewController()
+        let vc = CartViewController()
         let navVC = UINavigationController(rootViewController: vc)
 
         navVC.tabBarItem = UITabBarItem(
@@ -33,21 +47,19 @@ final class TabBarController: UITabBarController {
     }
 
     private var profileNavigationController: UINavigationController {
-        let navigationController = UINavigationController()
-        let viewController = ProfileViewController()
+        let vc = ProfileViewController()
+        let navVC = UINavigationController(rootViewController: vc)
 
-        navigationController.viewControllers = [viewController]
-
-        navigationController.tabBarItem = UITabBarItem(
+        navVC.tabBarItem = UITabBarItem(
             title: L.Profile.title,
             image: A.Icons.TabBar.profile.image,
             selectedImage: nil
         )
-        return navigationController
+        return navVC
     }
 
     private var statisticNavigationController: UINavigationController {
-        let vc = ProfileViewController()
+        let vc = StatisticViewController()
         let navVC = UINavigationController(rootViewController: vc)
 
         navVC.tabBarItem = UITabBarItem(
@@ -60,6 +72,7 @@ final class TabBarController: UITabBarController {
     }
 
     // MARK: - Overridden methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,6 +87,7 @@ final class TabBarController: UITabBarController {
     }
 
     // MARK: - Private Methods
+    
     private func setupUI() {
         tabBar.backgroundColor = A.Colors.whiteDynamic.color
         tabBar.barTintColor = A.Colors.whiteDynamic.color

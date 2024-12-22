@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  ProfileController.swift
 //  FakeNFT
 //
 //  Created by Aliaksandr Charnyshou on 11.12.2024.
