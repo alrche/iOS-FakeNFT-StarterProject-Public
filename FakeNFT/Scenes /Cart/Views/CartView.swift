@@ -26,6 +26,7 @@ final class CartView: UIView {
     let payTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
         tableView.backgroundColor = A.Colors.lightGrayDynamic.color
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false

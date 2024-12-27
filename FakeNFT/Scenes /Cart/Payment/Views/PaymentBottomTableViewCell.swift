@@ -1,20 +1,21 @@
 //
-//  CartPayTableViewCell.swift
+//  PaymentBottomTableViewCell.swift
 //  FakeNFT
 //
-//  Created by Богдан Топорин on 19.12.2024.
+//  Created by Богдан Топорин on 27.12.2024.
 //
 
 import Foundation
 import UIKit
 import SkeletonView
 
-protocol CartPayTableViewCellDelegate: AnyObject {
+protocol PaymentTableViewCellDelegate: AnyObject {
     func didTapPayButton()
 }
 
-final class CartPayTableViewCell: UITableViewCell,ReuseIdentifying {
-    weak var delegate: CartPayTableViewCellDelegate?
+final class PaymentBottomTableViewCell: UITableViewCell,ReuseIdentifying {
+    
+    weak var delegate: PaymentTableViewCellDelegate?
     // MARK: - Private properties
     private enum Constants {
         static let skeletonText = "             "
@@ -27,17 +28,17 @@ final class CartPayTableViewCell: UITableViewCell,ReuseIdentifying {
             static let inset: CGFloat = 16
         }
         enum PayButton {
-            static let Height: CGFloat = 44
-            static let Width: CGFloat = 240
+            static let Height: CGFloat = 60
+            static let Width: CGFloat = 343
         }
     }
-
+    
     private let viewWithContent: UIView = {
         let view = UIView()
         view.backgroundColor = A.Colors.lightGrayDynamic.color
         return view
     }()
-  
+    
     private let payButton: UIButton = {
         let button = UIButton()
         button.setTitle(L.Cart.pay, for: .normal)
@@ -52,56 +53,47 @@ final class CartPayTableViewCell: UITableViewCell,ReuseIdentifying {
     }()
     private lazy var payNftStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = Constants.PayStackView.spacing
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
-        for subview in [nftCountLabel, totalPriceLabel] {
+        for subview in [termsLabel] {
             stackView.addArrangedSubview(subview)
         }
         stackView.skeletonCornerRadius = 12
         return stackView
     }()
     
-    private let nftCountLabel: UILabel = {
+    private let termsLabel: UILabel = {
         let label = UILabel()
         label.font = .Regular.small
-        label.textColor = A.Colors.blackDynamic.color
-        label.text = Constants.skeletonText
-        label.skeletonCornerRadius = 12
+        label.numberOfLines = 2
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .left
+        label.isUserInteractionEnabled = true
         return label
     }()
-    private let totalPriceLabel: UILabel = {
-        let label = UILabel()
-        label.font = .Bold.small
-        label.textColor = A.Colors.green.color
-        label.skeletonCornerRadius = 12
-        return label
-    }()
-
-
+    
+    
     // MARK: - Initializers
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         setupLayout()
+        
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-  
+    
+    
     // MARK: - Public methods
-
-    func configCell(model: [CartNFTModel]) {
-        nftCountLabel.text = "\(model.count) NFT"
-        let totalPrice = model
-            .reduce(0.0) { $0 + $1.price }
-        totalPriceLabel.text = "\(totalPrice) ETH"
+    
+    func configCell() {
+        setupTermsLabel()
     }
-
+    
     private func setupUI() {
         contentView.addSubview(viewWithContent)
         [payNftStackView, payButton].forEach {
@@ -116,29 +108,31 @@ final class CartPayTableViewCell: UITableViewCell,ReuseIdentifying {
         contentView.isSkeletonable = true
         contentView.backgroundColor = A.Colors.lightGrayDynamic.color
     }
-
+    
     private func setupLayout() {
         viewWithContent.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(Constants.ViewWithContent.inset)
         }
+        
 
         payNftStackView.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview()
+            make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(44)
+            make.width.equalTo(316)
         }
-
+        
         payButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
-            make.leading.equalTo(payNftStackView.snp.trailing).offset(24)
-            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.top.equalTo(payNftStackView.snp.bottom).offset(16)
             make.height.equalTo(Constants.PayButton.Height)
             make.width.equalTo(Constants.PayButton.Width)
         }
     }
-
+    
 }
 
-extension CartPayTableViewCell {
+extension PaymentBottomTableViewCell {
     @objc private func handleButtonPressDown() {
         UIView.animate(withDuration: 0.2) {
             self.payButton.alpha = 0.6
@@ -156,4 +150,28 @@ extension CartPayTableViewCell {
     @objc private func handlePayButtonTapped() {
             delegate?.didTapPayButton()
         }
+}
+
+extension PaymentBottomTableViewCell {
+    private func setupTermsLabel() {
+        let fullText = L.Cart.userAgreementStart + " " + L.Cart.userAgreementEnd
+        let linkText = L.Cart.userAgreementEnd
+        let attributedString = NSMutableAttributedString(string: fullText)
+        if let linkRange = fullText.range(of: linkText) {
+            let nsRange = NSRange(linkRange, in: fullText)
+            attributedString.addAttribute(.foregroundColor, value: A.Colors.blue.color, range: nsRange)
+        } else {
+            print("Link text not found in fullText.")
+        }
+        termsLabel.attributedText = attributedString
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLinkTap))
+        tapGesture.cancelsTouchesInView = false
+        termsLabel.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func handleLinkTap() {
+        if let url = URL(string: "https://example.com/terms") {
+            UIApplication.shared.open(url)
+        }
+    }
 }
