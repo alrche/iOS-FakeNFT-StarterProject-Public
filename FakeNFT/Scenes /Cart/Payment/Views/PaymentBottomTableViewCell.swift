@@ -170,7 +170,7 @@ extension PaymentBottomTableViewCell {
     }
     
     @objc private func handleLinkTap() {
-        if let url = URL(string: "https://example.com/terms") {
+        if let url = URL(string: "https://yandex.ru/legal/practicum_termsofuse/") {
             UIApplication.shared.open(url)
         }
     }

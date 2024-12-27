@@ -188,7 +188,6 @@ extension PaymentViewController: PaymentTableViewCellDelegate {
         }
         let currencyId = selectedCurrency.id
         viewModel.initiatePayment(for: currencyId)
-        print("successful pay with \(currencyId)")
     }
 }
 
