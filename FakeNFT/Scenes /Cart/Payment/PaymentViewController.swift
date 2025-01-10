@@ -82,12 +82,6 @@ final class PaymentViewController: UIViewController {
         }
     }
     
-    private func showPaymentErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Payment Failed", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
     private func showSkeletonIfNeeded() {
         if viewModel.currenciesList == nil {
             currencyView.colletionView.visibleCells.forEach {

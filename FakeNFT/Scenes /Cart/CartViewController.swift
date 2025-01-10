@@ -11,15 +11,14 @@ import SkeletonView
 final class CartViewController: UIViewController {
     
     // MARK: - Private properties
-    
+    private var selectedNFT: CartNFTModel?
     private let cartView = CartView()
-    private let emtyView = EmptyView()
     private var viewModel = CartViewModel()
     private lazy var sortButton = UIBarButtonItem(
         image: A.Icons.sort.image,
         style: .plain,
         target: self,
-        action: nil
+        action: #selector(didTapSortButton)
     )
     
     // MARK: - Initializers
@@ -46,8 +45,6 @@ final class CartViewController: UIViewController {
         bind()
         cartView.tableView.dataSource = self
         cartView.payTableView.dataSource = self
-        
-        emtyView.isHidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -77,6 +74,21 @@ final class CartViewController: UIViewController {
         }
     }
     
+    @objc private func didTapSortButton() {
+        let sortAlert = AlertModel.sortActionSheet(
+            priceCompletion: { [weak self] in
+                self?.viewModel.sortByPrice()
+            },
+            ratingCompletion: { [weak self] in
+                self?.viewModel.sortByRating()
+            },
+            nameCompletion: { [weak self] in
+                self?.viewModel.sortByName()
+            }
+        )
+        AlertPresenter.show(in: self, model: sortAlert)
+    }
+    
     private func configureNavigationBar() {
         sortButton.tintColor = A.Colors.blackDynamic.color
         navigationItem.setRightBarButton(sortButton, animated: false)
@@ -94,18 +106,18 @@ final class CartViewController: UIViewController {
     }
     
     private func updateEmptyViewVisibility() {
-            if let nftList = viewModel.nftList, nftList.isEmpty {
-                
-                self.emtyView.isHidden = false
-                self.cartView.tableView.isHidden = true
-                self.cartView.payTableView.isHidden = true
-            } else {
-                
-                self.emtyView.isHidden = true
-                self.cartView.tableView.isHidden = false
-                self.cartView.payTableView.isHidden = false
-            }
+        if let nftList = viewModel.nftList, nftList.isEmpty {
+            self.navigationController?.isNavigationBarHidden = true
+            self.cartView.emptyView.isHidden = false
+            self.cartView.tableView.isHidden = true
+            self.cartView.payTableView.isHidden = true
+        } else {
+            self.navigationController?.isNavigationBarHidden = false
+            self.cartView.emptyView.isHidden = true
+            self.cartView.tableView.isHidden = false
+            self.cartView.payTableView.isHidden = false
         }
+    }
     
     private func changeSortButtonState(isEnabled: Bool) {
         navigationItem.rightBarButtonItem?.isEnabled = isEnabled
@@ -153,6 +165,7 @@ extension CartViewController: SkeletonTableViewDataSource {
             if let nftList = viewModel.nftList {
                 cell.hideSkeleton(transition: .crossDissolve(0.25))
                 cell.configCell(model: nftList[indexPath.row])
+                cell.delegate = self
             }
             return cell
         case cartView.payTableView:
@@ -192,3 +205,42 @@ extension CartViewController: CartPayTableViewCellDelegate {
     }
     
 }
+
+extension CartViewController: CartTableViewCellDelegate {
+    func didTapDeleteButton(on cell: CartTableViewCell) {
+        guard let indexPath = cartView.tableView.indexPath(for: cell),
+              let nftList = viewModel.nftList else { return }
+        selectedNFT = nftList[indexPath.row]
+        showConfirmationPopup()
+    }
+    private func showConfirmationPopup() {
+        let confirmationPopup = ConfirmationPopupView(frame: UIScreen.main.bounds)
+        
+        if let selectedNFT = selectedNFT {
+            confirmationPopup.configCell(model: selectedNFT)
+        }
+        confirmationPopup.onDelete = { [weak self] in
+            guard let self = self else { return }
+            if var nftList = self.viewModel.nftList {
+                if let index = nftList.firstIndex(where: { $0.name == self.selectedNFT?.name }) {
+                    nftList.remove(at: index)
+                    self.viewModel.updateNFTList(nftList)
+                    self.cartView.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+                self.updateEmptyViewVisibility()
+            }
+            confirmationPopup.removeFromSuperview()
+        }
+        
+        confirmationPopup.onCancel = {
+            print("Закрыть попап")
+            confirmationPopup.removeFromSuperview()
+        }
+        
+        if let window = UIApplication.shared.keyWindow {
+            window.addSubview(confirmationPopup)
+        }
+    }
+}
+
+
