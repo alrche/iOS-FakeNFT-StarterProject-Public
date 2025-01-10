@@ -24,12 +24,49 @@ final class  CartService {
         }
     }
 
+    static func fetchCurrencyList(completion: @escaping (Result<[CurrencyModel], Error>) -> Void) {
+        assert(Thread.isMainThread)
+        let request = GetCurrenciesRequest()
+        DefaultNetworkClient().send(request: request, type: [CurrencyModel].self) { result in
+            switch result {
+            case .success(let currencies):
+                updateCurrencyIfNeeded(currencyList: currencies)
+                completion(.success(currencies))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    static func fetchPayment(id: String,
+                             completion: @escaping (Result<PaymentResponse, Error>
+                             ) -> Void) {
+        assert(Thread.isMainThread)
+        let request = GetPaymentRequest(id: id)
+        DefaultNetworkClient().send(request: request, type: PaymentResponse.self) { result in
+            switch result {
+            case .success(let payment):
+                completion(.success(payment))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
     // MARK: - Private methods
     private static func updateCartIfNeeded(cartModel: CartModel) {
         let userDefaults = UserDefaults.standard
         if userDefaults.cart != cartModel {
             userDefaults.cart = cartModel
             userDefaults.cartLastChangeTime = Int(Date().timeIntervalSince1970)
+        }
+    }
+    
+    private static func updateCurrencyIfNeeded(currencyList: [CurrencyModel]) {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.currencies != currencyList {
+            userDefaults.currencies = currencyList
+            userDefaults.currencyLastChangeTime = Int(Date().timeIntervalSince1970)
         }
     }
 
