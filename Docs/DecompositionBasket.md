@@ -37,29 +37,29 @@
 
 ## Module 3:
 ### Сортировка NFT
--   UI (est: 5 h  | fact: _ h):
-    -   `TableViewCell`  (est: 2 h  | fact: _ h);
-    -   `TableView`  (est: 2 h  | fact: _ h);
-    -   `Alert`  с кнопкой  `Back`, `TableView` и лейблом `Сортировка`  (est: 1 h  | fact: _ h).
--   Сеть (est: 4 h  | fact: _ h):
-    -   Логика сортировки (est: 4h  | fact: _ h)
--   Пустой экран (est: 1.5 h  | fact: _ h):
-    -   UI (пустой экран с лейблом (est: 0.5 h  | fact: _ h);
-    -   Логика показа пустого экрана (est: 1 h  | fact: _ h).
+-   UI (est: 5 h  | fact: 3 h):
+    -   `TableViewCell`  (est: 2 h  | fact: 1 h);
+    -   `TableView`  (est: 2 h  | fact: 1 h);
+    -   `Alert`  с кнопкой  `Back`, `TableView` и лейблом `Сортировка`  (est: 1 h  | fact: 1 h).
+-   Сеть (est: 4 h  | fact: 2 h):
+    -   Логика сортировки (est: 4h  | fact: 2 h)
+-   Пустой экран (est: 1.5 h  | fact: 1 h):
+    -   UI (пустой экран с лейблом (est: 0.5 h  | fact: 0.5 h);
+    -   Логика показа пустого экрана (est: 1 h  | fact: 0.5 h).
 
-`Total:`  est: 9.5 h  | fact: _ h.
+`Total:`  est: 9.5 h  | fact: 5 h.
 
 ### Экран Удаление NFT
--   UI (est: 7 h  | fact: _ h):
-    -  `ImageView` для картинки выбранной NFT  (est: 3 h  | fact: _ h);
-    - `Label` для предупреждения (est: 1h  | fact: _ h);
-    - `Stackview` для кнопок `Delete` и `Return` (est: 3h  | fact: _ h);
--   Сеть и логика (est: 5 h  | fact: _ h):
-    -   Открытие экрана  `Удаление NFT`  (est: 1 h  | fact: _ h)
-    -   Удаление NFT (est: 1.5 h  | fact: _ h);
-    -   Сохранение измененных данных о выбранных NFT (est: 3 h  | fact: _ h);
-    -   Закрытие экрана (est: 0.5 h  | fact: _ h).
+-   UI (est: 7 h  | fact: 3 h):
+    -  `ImageView` для картинки выбранной NFT  (est: 3 h  | fact: 1 h);
+    - `Label` для предупреждения (est: 1h  | fact: 1 h);
+    - `Stackview` для кнопок `Delete` и `Return` (est: 3h  | fact: 1 h);
+-   Сеть и логика (est: 5 h  | fact: 3.5 h):
+    -   Открытие экрана  `Удаление NFT`  (est: 1 h  | fact: 1 h)
+    -   Удаление NFT (est: 1.5 h  | fact: 1 h);
+    -   Сохранение измененных данных о выбранных NFT (est: 3 h  | fact: 1 h);
+    -   Закрытие экрана (est: 0.5 h  | fact: 0.5 h).
 
-`Total:`  est: 12 h  | fact: _ h.
+`Total:`  est: 12 h  | fact: 7.5 h.
 
-## `Total:`  est: 49.5 h  | fact: _ h.
+## `Total:`  est: 49.5 h  | fact: 30.8 h.
