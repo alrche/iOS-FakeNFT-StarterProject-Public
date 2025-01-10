@@ -9,7 +9,13 @@ import UIKit
 import SkeletonView
 import Kingfisher
 
+protocol CartTableViewCellDelegate: AnyObject {
+    func didTapDeleteButton(on cell: CartTableViewCell)
+}
+
 final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
+    
+    weak var delegate: CartTableViewCellDelegate?
     // MARK: - Private properties
     
     private enum Constants {
@@ -238,6 +244,8 @@ extension CartTableViewCell {
         UIView.animate(withDuration: 0.2) {
             self.deleteButton.alpha = 1.0
             self.deleteButton.transform = .identity
+        } completion: { _ in
+            self.delegate?.didTapDeleteButton(on: self)
         }
     }
 }
