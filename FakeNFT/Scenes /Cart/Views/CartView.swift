@@ -36,6 +36,12 @@ final class CartView: UIView {
         return tableView
     }()
     
+    let emptyView: EmptyView = {
+            let view = EmptyView()
+            view.isHidden = true
+            return view
+        }()
+    
     // MARK: - Initializers
     
     override init(frame: CGRect) {
@@ -57,6 +63,11 @@ final class CartView: UIView {
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(76)
         }
+        
+        addSubview(emptyView)
+                emptyView.snp.makeConstraints { make in
+                    make.edges.equalToSuperview()
+                }
     }
     
     private func setupLayout() {
