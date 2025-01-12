@@ -219,8 +219,8 @@ extension CartViewController: CartTableViewCellDelegate {
         if let selectedNFT = selectedNFT {
             confirmationPopup.configCell(model: selectedNFT)
         }
-        confirmationPopup.onDelete = { [weak self] in
-            guard let self = self else { return }
+        confirmationPopup.onDelete = { [weak self, weak confirmationPopup] in
+            guard let self = self, let confirmationPopup = confirmationPopup else { return }
             if var nftList = self.viewModel.nftList {
                 if let index = nftList.firstIndex(where: { $0.name == self.selectedNFT?.name }) {
                     nftList.remove(at: index)
@@ -229,17 +229,14 @@ extension CartViewController: CartTableViewCellDelegate {
                 }
                 self.updateEmptyViewVisibility()
             }
-            confirmationPopup.removeFromSuperview()
         }
         
         confirmationPopup.onCancel = {
-            print("Закрыть попап")
-            confirmationPopup.removeFromSuperview()
+            [weak confirmationPopup] in
+            guard let confirmationPopup = confirmationPopup else { return }
         }
         
-        if let window = UIApplication.shared.keyWindow {
-            window.addSubview(confirmationPopup)
-        }
+        UIApplication.shared.keyWindow?.addSubview(confirmationPopup)
     }
 }
 
