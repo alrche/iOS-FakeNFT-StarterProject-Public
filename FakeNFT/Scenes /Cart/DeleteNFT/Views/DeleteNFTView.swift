@@ -8,14 +8,14 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class ConfirmationPopupView: UIView {
+final class ConfirmationPopupView: UIView {
     // MARK: - Subviews
     private let backgroundView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .light) // Выбираем стиль блюра
         let view = UIVisualEffectView(effect: blurEffect)
         return view
     }()
-
+    
     private let popupView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -24,14 +24,14 @@ class ConfirmationPopupView: UIView {
         view.alpha = 0
         return view
     }()
-
+    
     private let nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
         imageView.layer.masksToBounds = true
         return imageView
     }()
-
+    
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.text = L.Cart.deleteQuestion
@@ -41,7 +41,7 @@ class ConfirmationPopupView: UIView {
         label.font = .Regular.small
         return label
     }()
-
+    
     private let deleteButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(L.Cart.delete, for: .normal)
@@ -51,7 +51,7 @@ class ConfirmationPopupView: UIView {
         button.layer.cornerRadius = 12
         return button
     }()
-
+    
     private let cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(L.Cart.return, for: .normal)
@@ -73,12 +73,16 @@ class ConfirmationPopupView: UIView {
         stackView.skeletonCornerRadius = 12
         return stackView
     }()
-
+    
     // MARK: - Initialization
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+    }
+    
+    override func  didMoveToSuperview() {
+        super.didMoveToSuperview()
         showWithAnimation()
     }
     
@@ -91,7 +95,7 @@ class ConfirmationPopupView: UIView {
     func configCell(model: CartNFTModel) {
         setImage(url: model.image) { _ in }
     }
-
+    
     private func setupView() {
         addSubview(backgroundView)
         addSubview(popupView)
@@ -104,23 +108,23 @@ class ConfirmationPopupView: UIView {
             $0.width.equalTo(262)
             $0.height.equalTo(220)
         }
-
+        
         nftImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(108)
         }
-
+        
         messageLabel.snp.makeConstraints {
             $0.top.equalTo(nftImageView.snp.bottom).offset(12)
             $0.centerX.equalToSuperview()
         }
-
+        
         deleteButton.snp.makeConstraints {
             $0.height.equalTo(44)
             $0.width.equalTo(127)
         }
-
+        
         cancelButton.snp.makeConstraints {
             $0.height.equalTo(44)
             $0.width.equalTo(127)
@@ -130,20 +134,20 @@ class ConfirmationPopupView: UIView {
             $0.top.equalTo(messageLabel.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-
+        
         deleteButton.addTarget(self, action: #selector(didTapDelete), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(didTapCancel), for: .touchUpInside)
     }
-
+    
     // MARK: - Animation
-
+    
     private func showWithAnimation() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
             self.popupView.transform = .identity
             self.popupView.alpha = 1
         })
     }
-
+    
     private func hideWithAnimation(completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: 0.2, animations: {
             self.popupView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
@@ -153,16 +157,16 @@ class ConfirmationPopupView: UIView {
             self.removeFromSuperview()
         }
     }
-
+    
     // MARK: - Actions
     var onDelete: (() -> Void)?
     var onCancel: (() -> Void)?
-
+    
     @objc func didTapDelete() {
         onDelete?()
         hideWithAnimation()
     }
-
+    
     @objc func didTapCancel() {
         onCancel?()
         hideWithAnimation()
