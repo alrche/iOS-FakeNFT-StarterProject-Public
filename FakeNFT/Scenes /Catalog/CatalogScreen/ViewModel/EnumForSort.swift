@@ -2,7 +2,12 @@
 //  EnumForSort.swift
 //  FakeNFT
 //
-//  Created by MacBook Pro 15 on 22.12.2024.
+//  Created by Doroteya Galbacheva on 22.12.2024.
 //
 
 import Foundation
+
+enum SortOption: String {
+    case name = "sortByName"
+    case count = "sortByCount"
+}
