@@ -33,9 +33,9 @@ final class CollectionViewController: UIViewController {
     }()
     
     private lazy var topView: UIView = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let topView = UIView()
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        return topView
     }()
     
     private lazy var nameLabel: UILabel = {
@@ -53,15 +53,12 @@ final class CollectionViewController: UIViewController {
     }()
     
     private lazy var urlButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let font = UIFont.Regular.small
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: font,
-            .foregroundColor: A.Colors.blue.color
-        ]
-        let attributedTitle = NSAttributedString(string: "", attributes: attributes)
-        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.setTitleColor(UIColor.link, for: .normal)
+        button.titleLabel?.font  =  font
         button.addTarget(self, action: #selector(goToAuthorURL), for: .touchUpInside)
         button.contentHorizontalAlignment = .left
         return button
@@ -101,11 +98,12 @@ final class CollectionViewController: UIViewController {
         addSubviews()
         configureNavBar()
         addConstraints()
+        configureSubviews()
         loadData()
     }
     
     private func loadData() {
-        viewModel.fetchCollections {
+        viewModel.fetchNFTs {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.updateCollectionViewHeight()
@@ -143,12 +141,6 @@ final class CollectionViewController: UIViewController {
         topView.addSubview(urlButton)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(collectionView)
-        
-        topImage.image = UIImage(named: "peachMaxi")
-        nameLabel.text = "Peach"
-        firstAuthorLabel.text = L.Catalog.collectionAuthor
-        urlButton.setTitle("John Doe", for: .normal)
-        descriptionLabel.text = "Персиковый — как облака над закатным солнцем в океане. В этой коллекции совмещены трогательная нежность и живая игривость сказочных зефирных зверей."
     }
     
     private func addConstraints() {
@@ -204,6 +196,22 @@ final class CollectionViewController: UIViewController {
         collectionViewHeightConstraint?.isActive = true
     }
     
+    func configureSubviews() {
+        let pickedCollection = viewModel.getPickedCollection()
+        let urlForImage = pickedCollection.cover
+        topImage.kf.setImage(
+            with: urlForImage,
+            options: [
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ]
+        )
+        nameLabel.text = pickedCollection.name
+        urlButton.setTitle(pickedCollection.author, for: .normal)
+        firstAuthorLabel.text = L.Catalog.collectionAuthor
+        descriptionLabel.text = pickedCollection.description
+    }
+    
     func updateCollectionViewHeight() {
         let numberOfItems = collectionView.numberOfItems(inSection: 0)
         let rows = CGFloat((numberOfItems / 3) + (numberOfItems % 3 == 0 ? 0 : 1))
@@ -219,7 +227,7 @@ final class CollectionViewController: UIViewController {
     }
     
     @objc func goToAuthorURL() {
-        
+        print("Переход по ссылке: ")
     }
 }
 
@@ -240,6 +248,7 @@ extension CollectionViewController: UICollectionViewDataSource {
         }
         
         let nft = viewModel.collection(at: indexPath.row)
+        cell.prepareForReuse()
         cell.configure(nft: nft)
         
         return cell
