@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol NFTCollectionViewCellDelegate: AnyObject {
+    func tapLikeButton(with id: String)
+    func tapCartButton(with id: String)
+}
+
 final class NFTCellForCollectionView: UICollectionViewCell {
     static let reuseIdentifier = "NFTCollectionViewCell"
+    weak var delegate: NFTCollectionViewCellDelegate?
+    private var id = ""
     private var isLike = false
     private var inCart = false
     
@@ -25,7 +32,7 @@ final class NFTCellForCollectionView: UICollectionViewCell {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.Bold.small
-        label.textColor = .black
+        label.textColor = A.Colors.blackDynamic.color
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -38,15 +45,17 @@ final class NFTCellForCollectionView: UICollectionViewCell {
         return label
     }()
     
-    private lazy var favoriteButton: UIButton = {
+    private lazy var favouriteButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(favouriteButtonTapped), for: .touchUpInside)
         return button
     }()
     
     private lazy var cartButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -62,7 +71,6 @@ final class NFTCellForCollectionView: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         constraintView()
     }
     
@@ -78,13 +86,14 @@ final class NFTCellForCollectionView: UICollectionViewCell {
         nftImageView.image = nil
         updateRating(0)
         cartButton.setImage(nil, for: .normal)
-        favoriteButton.setImage(nil, for: .normal)
+        favouriteButton.setImage(nil, for: .normal)
         ethLabel.text = ""
     }
     
-    func configure(nft: Nft) {
-        isLike = true
-        inCart  = true
+    func configure(nft: Nft, isLike: Bool, nftID: String, inCart: Bool) {
+        id = nftID
+        self.isLike = isLike
+        self.inCart  = inCart
         let fullName = nft.name
         let firstName = fullName.components(separatedBy: " ").first ?? fullName
         
@@ -98,8 +107,9 @@ final class NFTCellForCollectionView: UICollectionViewCell {
                 .cacheOriginalImage
             ]
         )
+        
         let imageForLike = isLike ? A.Icons.favouriteActive.image : A.Icons.favouriteInactive.image
-        favoriteButton.setImage(imageForLike, for: .normal)
+        favouriteButton.setImage(imageForLike, for: .normal)
         let imageForCart = inCart ? A.Icons.deleteNft.image.withTintColor(A.Colors.blackDynamic.color, renderingMode: .alwaysOriginal) : A.Icons.basket.image.withTintColor(A.Colors.blackDynamic.color, renderingMode: .alwaysOriginal)
         cartButton.setImage(imageForCart, for: .normal)
         ethLabel.text = "\(Int(nft.price)) \(L.Catalog.eth)"
@@ -134,7 +144,7 @@ final class NFTCellForCollectionView: UICollectionViewCell {
          ratingStackView,
          nameLabel,
          ethLabel,
-         favoriteButton,
+         favouriteButton,
          cartButton].forEach {
             contentView.addSubview($0)
         }
@@ -158,15 +168,30 @@ final class NFTCellForCollectionView: UICollectionViewCell {
             ethLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             ethLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
-            favoriteButton.topAnchor.constraint(equalTo: nftImageView.topAnchor),
-            favoriteButton.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 40),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 40),
+            favouriteButton.topAnchor.constraint(equalTo: nftImageView.topAnchor),
+            favouriteButton.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor),
+            favouriteButton.widthAnchor.constraint(equalToConstant: 40),
+            favouriteButton.heightAnchor.constraint(equalToConstant: 40),
             
             cartButton.topAnchor.constraint(equalTo: ratingStackView.bottomAnchor, constant: 4),
             cartButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             cartButton.widthAnchor.constraint(equalToConstant: 40),
             cartButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+    
+    @objc func favouriteButtonTapped() {
+        isLike.toggle()
+        let imageForLike = isLike ? A.Icons.favouriteActive.image : A.Icons.favouriteInactive.image
+        favouriteButton.setImage(imageForLike, for: .normal)
+        delegate?.tapLikeButton(with: id)
+    }
+    
+    @objc func cartButtonTapped() {
+        inCart.toggle()
+        
+        let imageForCart = inCart ? A.Icons.inactiveBasket.image.withTintColor(A.Colors.blackDynamic.color, renderingMode: .alwaysOriginal) : A.Icons.basket.image.withTintColor(A.Colors.blackDynamic.color, renderingMode: .alwaysOriginal)
+        cartButton.setImage(imageForCart, for: .normal)
+        delegate?.tapCartButton(with: id)
     }
 }
