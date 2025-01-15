@@ -1,13 +1,13 @@
 //
-//  ProfileModel.swift
+//  Profile.swift
 //  FakeNFT
 //
-//  Created by Aliaksandr Charnyshou on 14.12.2024.
+//  Created by MacBook Pro 15 on 14.01.2025.
 //
 
 import Foundation
 
-struct ProfileModel: Codable, Equatable {
+struct Profile: Codable, Equatable {
     var name: String
     var avatar: String
     var description: String
