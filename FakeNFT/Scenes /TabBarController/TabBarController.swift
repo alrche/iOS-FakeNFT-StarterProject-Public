@@ -22,22 +22,16 @@ final class TabBarController: UITabBarController {
     }
 
     private var cartNavigationController: UINavigationController {
-<<<<<<< HEAD
-        let navigationController = CartNavigationViewController()
-        let vc = CartViewController()
-        navigationController.viewControllers = [vc]
-=======
         let vc = CartViewController()
         let navVC = UINavigationController(rootViewController: vc)
->>>>>>> 25a356f95efa63357417625bf6d29c0fdb6d2da9
 
-        navigationController.tabBarItem = UITabBarItem(
+        navVC.tabBarItem = UITabBarItem(
             title: L.Cart.title,
             image: A.Icons.TabBar.cart.image,
             selectedImage: nil
         )
 
-        return navigationController
+        return navVC
     }
 
     private var profileNavigationController: UINavigationController {

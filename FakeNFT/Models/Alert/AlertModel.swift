@@ -85,32 +85,5 @@ struct AlertModel {
             preferredStyle: .actionSheet
         )
     }
-<<<<<<< HEAD
-    
-    
-    static func paymentFailedAlert(
-            retryCompletion: @escaping () -> Void,
-            cancelCompletion: @escaping () -> Void
-        ) -> AlertModel {
-            return AlertModel(
-                title: L.Cart.failurePay,
-                message: nil,
-                buttons: [
-                    AlertButton(
-                        text: L.Alert.cancel,
-                        style: .default,
-                        completion: cancelCompletion
-                    ),
-                    AlertButton(
-                        text: L.Alert.repeat,
-                        style: .cancel,
-                        completion: retryCompletion
-                    )
-                ],
-                preferredStyle: .alert
-            )
-        }
-=======
->>>>>>> 25a356f95efa63357417625bf6d29c0fdb6d2da9
 
 }
