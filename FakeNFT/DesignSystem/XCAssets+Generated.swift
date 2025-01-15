@@ -63,6 +63,7 @@ public enum A {
       public static let successPay = ImageAsset(name: "successPay")
     }
     public enum Profile {
+      public static let avatar = ImageAsset(name: "avatar")
       public static let stub = ImageAsset(name: "stub")
     }
   }

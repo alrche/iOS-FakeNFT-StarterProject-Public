@@ -85,6 +85,7 @@ struct AlertModel {
             preferredStyle: .actionSheet
         )
     }
+<<<<<<< HEAD
     
     
     static func paymentFailedAlert(
@@ -109,5 +110,7 @@ struct AlertModel {
                 preferredStyle: .alert
             )
         }
+=======
+>>>>>>> 25a356f95efa63357417625bf6d29c0fdb6d2da9
 
 }
