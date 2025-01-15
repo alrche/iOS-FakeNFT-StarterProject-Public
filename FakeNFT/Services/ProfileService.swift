@@ -32,7 +32,7 @@ protocol ProfileServiceProtocol {
 struct ProfileService: ProfileServiceProtocol {
 
     // MARK: - Private properties
-    
+
     private let networkClient: NetworkClient
     private let storageService: StorageService
 
