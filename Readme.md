@@ -15,7 +15,7 @@
 
 Скринкаст эпиков:
 - Каталог
-- Корзина
+- [Корзина](https://disk.yandex.ru/i/iuCf_Yy8mZZ9bA)
 - [Профиль](https://disk.yandex.ru/i/84HdoEfbq88OdA)
 
 # Назначение и цели приложения
