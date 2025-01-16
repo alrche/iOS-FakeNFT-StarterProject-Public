@@ -638,6 +638,7 @@
 				3F68068F29CBBAF100B4F915 /* Sources */,
 				3F68069029CBBAF100B4F915 /* Frameworks */,
 				3F68069129CBBAF100B4F915 /* Resources */,
+				0633BF568F3DA0885E2302A9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -679,6 +680,7 @@
 				3F6806AF29CBBAF200B4F915 /* Sources */,
 				3F6806B029CBBAF200B4F915 /* Frameworks */,
 				3F6806B129CBBAF200B4F915 /* Resources */,
+				040190531B826C7F16568233 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -770,6 +772,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		040190531B826C7F16568233 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FakeNFT-FakeNFTUITests/Pods-FakeNFT-FakeNFTUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FakeNFT-FakeNFTUITests/Pods-FakeNFT-FakeNFTUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FakeNFT-FakeNFTUITests/Pods-FakeNFT-FakeNFTUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0633BF568F3DA0885E2302A9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FakeNFT/Pods-FakeNFT-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FakeNFT/Pods-FakeNFT-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FakeNFT/Pods-FakeNFT-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4069E5B02D09ADA600BBEB39 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
