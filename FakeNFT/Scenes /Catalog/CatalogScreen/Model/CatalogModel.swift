@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CatalogModel {
+final class CatalogService {
     private let networkClient: NetworkClient
     private let storage: NftStorage
     
