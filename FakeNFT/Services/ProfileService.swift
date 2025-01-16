@@ -10,26 +10,13 @@ import Foundation
 // MARK: - ProfileServiceProtocol
 
 protocol ProfileServiceProtocol {
-    func fetchProfile(completion: @escaping (Result<ProfileModel, Error>) -> Void)
-    func editProfile(
-        _ editProfileModel: EditProfileModel,
-        completion: @escaping (Result<ProfileModel, Error>) -> Void
-    )
-    func getNFT(
-        id: String,
-        completion: @escaping (Result<NFTNetworkModel, Error>) -> Void
-    )
-    func getNFTs(completion: @escaping (Result<[NFTModel], Error>) -> Void)
-    func getFavouriteNFTs(completion: @escaping (Result<[FavouriteNFTModel], Error>) -> Void)
-    func setLikes(
-        _ likesModel: LikesModel,
-        completion: @escaping (Result<ProfileModel, Error>) -> Void
-    )
     func loadProfile(completion: @escaping (Result<ProfileModel, Error>) -> Void)
     func sendExamplePutRequest(
-        likes: [String],
-        avatar: String,
         name: String,
+        avatar: String,
+        likes: [String],
+        description: String,
+        website: String,
         completion: @escaping ProfilePutCompletion
     )
 }
@@ -58,133 +45,6 @@ struct ProfileService: ProfileServiceProtocol {
     
     // MARK: - Public methods
     
-    func fetchProfile(completion: @escaping (Result<ProfileModel, Error>) -> Void) {
-        let request = GetProfileRequest()
-        networkClient.send(request: request, type: ProfileModel.self) { result in
-            switch result {
-            case .success(let model):
-                completion(.success(model))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func editProfile(
-        _ editProfileModel: EditProfileModel,
-        completion: @escaping (Result<ProfileModel, Error>) -> Void
-    ) {
-        let request = ChangeProfileRequest(model: editProfileModel)
-        networkClient.send(request: request, type: ProfileModel.self) { result in
-            switch result {
-            case .success(let model):
-                completion(.success(model))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func getNFT(
-        id: String,
-        completion: @escaping (Result<NFTNetworkModel, Error>) -> Void
-    ) {
-        let nftRequest = NFTRequest(id: id)
-        networkClient.send(request: nftRequest, type: NFTNetworkModel.self) { result in
-            switch result {
-            case .success(let model):
-                completion(.success(model))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func getNFTs(completion: @escaping (Result<[NFTModel], Error>) -> Void) {
-        guard let profile = storageService.profile else { return }
-        var nfts: [NFTModel?] = Array(repeating: nil, count: profile.nfts.count)
-        let dispatchGroup = DispatchGroup()
-        let dispatchQueue = DispatchQueue(label: "loading_nfts_queue")
-        for (index, nftId) in profile.nfts.enumerated() {
-            dispatchGroup.enter()
-            getNFT(id: nftId) { result in
-                switch result {
-                case .success(_):
-                    switch result {
-                    case .success(let nftModel):
-                        dispatchQueue.async {
-                            nfts[index] = NFTModel(image: nftModel.images[0],
-                                                   // TODO: заменить на nftModel.name после фикса API
-                                                   name: self.getNameFromImage(nftModel.images[0]),
-                                                   // TODO: заменить на nftModel.author после фикса API
-                                                   authorName: nftModel.name,
-                                                   rating: nftModel.rating,
-                                                   price: nftModel.price)
-                            dispatchGroup.leave()
-                        }
-                    case .failure(let error):
-                        completion(.failure(error))
-                        dispatchGroup.leave()
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
-                    dispatchGroup.leave()
-                }
-            }
-        }
-        dispatchGroup.notify(queue: dispatchQueue) {
-            completion(.success(nfts.compactMap { $0 }))
-        }
-    }
-    
-    func getFavouriteNFTs(completion: @escaping (Result<[FavouriteNFTModel], Error>) -> Void) {
-        guard let profile = storageService.profile else { return }
-        var nfts: [FavouriteNFTModel?] = Array(repeating: nil, count: profile.likes.count)
-        let dispatchGroup = DispatchGroup()
-        let dispatchQueue = DispatchQueue(label: "loading_fav_nfts_queue")
-        for (index, nftId) in profile.likes.enumerated() {
-            dispatchGroup.enter()
-            getNFT(id: nftId) { result in
-                switch result {
-                case .success(let nftModel):
-                    dispatchQueue.async {
-                        nfts[index] = FavouriteNFTModel(
-                            id: nftModel.id,
-                            image: nftModel.images[0],
-                            // TODO: заменить на nftModel.name после фикса API
-                            name: self.getNameFromImage(nftModel.images[0]),
-                            rating: nftModel.rating,
-                            price: nftModel.price
-                        )
-                        dispatchGroup.leave()
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
-                    dispatchGroup.leave()
-                }
-            }
-        }
-        dispatchGroup.notify(queue: dispatchQueue) {
-            completion(.success(nfts.compactMap { $0 }))
-        }
-    }
-    
-    func setLikes(
-        _ likesModel: LikesModel,
-        completion: @escaping (Result<ProfileModel, Error>) -> Void
-    ) {
-        let request = SetLikesRequest(model: likesModel)
-        networkClient.send(request: request, type: ProfileModel.self) { result in
-            switch result {
-            case .success(let model):
-                completion(.success(model))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    
     func loadProfile(completion: @escaping ProfileCompletion) {
         
         if let profile = storageService.getProfile() {
@@ -192,7 +52,7 @@ struct ProfileService: ProfileServiceProtocol {
             return
         }
         
-        let request = ProfileRequest()
+        let request = GetProfileRequest()
         networkClient.send(request: request, type: ProfileModel.self) { result in
             switch result {
             case .success(let model):
@@ -204,12 +64,14 @@ struct ProfileService: ProfileServiceProtocol {
         }
     }
     
-    func sendExamplePutRequest(likes: [String],
+    func sendExamplePutRequest(name: String,
                                avatar: String,
-                               name: String,
+                               likes: [String],
+                               description: String,
+                               website: String,
                                completion: @escaping ProfilePutCompletion) {
-        let dto = ProfileDtoObject(likes: likes, avatar: avatar, name: name)
-        let request = ProfilePutRequest(dto: dto)
+        let dto = ChangeProfileDtoObject(name: name, avatar: avatar, likes: likes, description: description, website: website)
+        let request = ChangeProfileRequest(dto: dto)
         networkClient.send(request: request, type: ProfileModel.self) { result in
             switch result {
             case .success(let profileResponse):

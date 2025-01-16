@@ -24,15 +24,15 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     private let collectionModel: CollectionModel
     private var pickedCollection: NFTModelCatalog
     private var NFTsFromCollection: Nfts = []
-    private var profile:  Profile? = nil
-    private var order: Order? = nil
+    private var profile:  ProfileModel? = nil
+    private var order: CartModel? = nil
     private var favouriteNFT: [String] = []
     private  var  cartNFT: [String] = []
     var showErrorAlert: ((String) ->  Void)?
-    private let profileService = ProfileServiceImpl(networkClient: DefaultNetworkClient(), storage:  ProfileStorageImpl())
+    private let profileService = ProfileService(networkClient: DefaultNetworkClient(), storageService:  StorageService())
     private let orderService = OrderServiceImpl(networkClient: DefaultNetworkClient())
     
-    init(pickedCollection: NFTModelCatalog, model: CollectionModel,  profile: Profile, order: Order) {
+    init(pickedCollection: NFTModelCatalog, model: CollectionModel,  profile: ProfileModel, order: CartModel) {
         self.collectionModel = model
         self.pickedCollection = pickedCollection
         self.profile = profile
@@ -114,16 +114,13 @@ final class CollectionViewModel: CollectionViewModelProtocol {
         
         if let index = favouriteNFT.firstIndex(of: nftId) {
             favouriteNFT.remove(at: index)
-            print("Удалили лайк из массива лайков")
         } else {
             favouriteNFT.append(nftId)
-            print("добавили: ! \(nftId) ! в массив лайков")
         }
         
-        profileService.sendExamplePutRequest(likes: favouriteNFT, avatar: profile.avatar, name: profile.name) { [weak self] result in
+        profileService.sendExamplePutRequest(name: profile.name, avatar: profile.avatar, likes: favouriteNFT, description: profile.description,website: profile.website) { [weak self] result in
             switch result {
             case .success(let updatedProfile):
-                print("Успешно отправили пут запрос на обновление массива лайков")
                 self?.profile = updatedProfile
             case .failure(let error):
                 self?.showErrorAlert?(error.localizedDescription)

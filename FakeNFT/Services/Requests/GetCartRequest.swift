@@ -1,5 +1,5 @@
 //
-//  NftOrderRequest.swift
+//  GetCartRequest.swift
 //  FakeNFT
 //
 //  Created by Doroteya Galbacheva on 14.01.2025.
@@ -7,10 +7,16 @@
 
 import Foundation
 
-struct NFTOrderRequest: NetworkRequest {
+struct GetCartRequest: NetworkRequest {
+    
     var endpoint: URL? {
-        URL(string: "\(RequestConstants.baseURL)/api/v1/orders/1")
+        Endpoint.cart.url
     }
+    
+    var httpMethod: HttpMethod {
+        .get
+    }
+    
     var dto: (any Dto)?
 }
 

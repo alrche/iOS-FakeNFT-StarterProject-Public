@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PaymentRequest: NetworkRequest {
+struct GetPaymentRequest: NetworkRequest {
     let id: String
     var endpoint: URL? {
         Endpoint.payment(id: self.id).url

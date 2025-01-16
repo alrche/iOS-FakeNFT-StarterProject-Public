@@ -105,8 +105,10 @@ extension CatalogViewController: UITableViewDelegate {
         ProgressHUD.animationType  = .circleBarSpinFade
         viewModel.getProfile() {
             DispatchQueue.main.async { [self] in
-                guard let profile = viewModel.profile else { return }
-                guard let order =  viewModel.order else { return }
+                guard let profile = viewModel.profile, let order = viewModel.order else {
+                    return
+                }
+    
                 let viewModelForCollectionVC = CollectionViewModel(
                     pickedCollection: viewModel.collection(at: indexPath.row),
                     model: CollectionModel(networkClient: DefaultNetworkClient(), storage: NftStorageImpl()), profile: profile, order: order)
