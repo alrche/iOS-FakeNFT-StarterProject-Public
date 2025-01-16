@@ -70,7 +70,7 @@ final class CatalogViewController: UIViewController {
     }
     
     private func loadData() {
-        ProgressHUD.show()
+        ProgressHUD.animate()
         ProgressHUD.animationType = .circleBarSpinFade
         viewModel.fetchCollections {
             DispatchQueue.main.async {
@@ -101,7 +101,7 @@ final class CatalogViewController: UIViewController {
 
 extension CatalogViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ProgressHUD.show()
+        ProgressHUD.animate()
         ProgressHUD.animationType  = .circleBarSpinFade
         viewModel.getProfile() {
             DispatchQueue.main.async { [self] in

@@ -31,7 +31,7 @@ final class CollectionModel {
     
     func loadCollection(idArrys: [String], completion: @escaping NftsCompletion) {
         var nfts: Nfts = []
-        ProgressHUD.show()
+        ProgressHUD.animate()
         let dispatchGroup = DispatchGroup()
         for i in idArrys {
             dispatchGroup.enter()

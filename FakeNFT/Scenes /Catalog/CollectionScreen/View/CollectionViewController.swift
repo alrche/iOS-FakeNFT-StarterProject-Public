@@ -104,7 +104,7 @@ final class CollectionViewController: UIViewController {
     }
     
     private func loadData() {
-        ProgressHUD.show()
+        ProgressHUD.animate()
         ProgressHUD.animationType = .circleBarSpinFade
         viewModel.fetchNFTs {
             DispatchQueue.main.async {
@@ -297,7 +297,7 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
 
 extension CollectionViewController: NFTCollectionViewCellDelegate {
     func tapLikeButton(with id: String) {
-        ProgressHUD.show()
+        ProgressHUD.animate()
         view.isUserInteractionEnabled = false
         viewModel.toggleLike(for: id) {
             ProgressHUD.dismiss()
@@ -306,7 +306,7 @@ extension CollectionViewController: NFTCollectionViewCellDelegate {
     }
     
     func tapCartButton(with id: String) {
-        ProgressHUD.show()
+        ProgressHUD.animate()
         view.isUserInteractionEnabled = false
         viewModel.toggleCart(for: id) {
             ProgressHUD.dismiss()

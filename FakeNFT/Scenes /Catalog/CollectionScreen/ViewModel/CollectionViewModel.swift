@@ -29,9 +29,9 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     private var favouriteNFT: [String] = []
     private  var  cartNFT: [String] = []
     var showErrorAlert: ((String) ->  Void)?
-    private let profileService = ProfileService(networkClient: DefaultNetworkClient(), storageService:  StorageService())
+    private let profileService = ProfileServiceImpl(networkClient: DefaultNetworkClient(), storage: ProfileStorageImpl())
     private let orderService = OrderServiceImpl(networkClient: DefaultNetworkClient())
-    
+
     init(pickedCollection: NFTModelCatalog, model: CollectionModel,  profile: ProfileModel, order: CartModel) {
         self.collectionModel = model
         self.pickedCollection = pickedCollection
@@ -42,7 +42,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     }
     
     func fetchCollections(completion: @escaping () -> Void) {
-        ProgressHUD.show()
+        ProgressHUD.animate()
         ProgressHUD.animationType = .circleBarSpinFade
         
         let dispatchGroup = DispatchGroup()
@@ -56,7 +56,6 @@ final class CollectionViewModel: CollectionViewModelProtocol {
                 ProgressHUD.dismiss()
                 completion()
             case .failure(let error):
-                ProgressHUD.showError()
                 print(error.localizedDescription)
             }
         }
@@ -75,7 +74,6 @@ final class CollectionViewModel: CollectionViewModelProtocol {
                 case .success(let nft):
                     nftsArray.append(nft)
                 case .failure(let error):
-                    ProgressHUD.showError()
                     print(error.localizedDescription)
                 }
                 dispatchGroup.leave()
@@ -118,7 +116,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
             favouriteNFT.append(nftId)
         }
         
-        profileService.sendExamplePutRequest(name: profile.name, avatar: profile.avatar, likes: favouriteNFT, description: profile.description,website: profile.website) { [weak self] result in
+        profileService.sendExamplePutRequest(likes: favouriteNFT, avatar: profile.avatar, name: profile.name) { [weak self] result in
             switch result {
             case .success(let updatedProfile):
                 self?.profile = updatedProfile
