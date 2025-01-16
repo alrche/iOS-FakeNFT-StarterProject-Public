@@ -17,6 +17,7 @@
 "alert.sort.price" = "By price";
 "alert.sort.rating" = "By rating";
 "alert.sort.name" = "By name";
+"alert.sort.amount" = "By the amount of NFTs";
 
 "ptr" = "Pull down to refresh";
 
@@ -89,3 +90,7 @@
 "statistics.isEmpty" = "It's empty";
 
 "catalog.title" = "Catalog";
+"catalog.ETH" = "ETH";
+"catalog.openNft" = "Open Nft";
+"catalog.collectionAuthor" = "Collection author:";
+"catalog.addToCart" = "Add to cart";

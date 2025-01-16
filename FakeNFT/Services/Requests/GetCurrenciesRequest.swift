@@ -9,11 +9,11 @@
 import Foundation
 
 struct GetCurrenciesRequest: NetworkRequest {
-    
+
     var endpoint: URL? {
         Endpoint.currency.url
     }
-    
+
     var httpMethod: HttpMethod {
         .get
     }

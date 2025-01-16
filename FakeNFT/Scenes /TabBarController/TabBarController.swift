@@ -6,19 +6,31 @@ final class TabBarController: UITabBarController {
 
     var servicesAssembly: ServicesAssembly!
 
+    init(servicesAssembly: ServicesAssembly) {
+        self.servicesAssembly = servicesAssembly
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Private Properties
 
     private var catalogNavigationController: UINavigationController {
-        let vc = CatalogViewController()
-        let navVC = UINavigationController(rootViewController: vc)
+        let navigationController = UINavigationController()
+        let viewModel = CatalogViewModel()
+        let vc = CatalogViewController(servicesAssembly: servicesAssembly, viewModel: viewModel)
 
-        navVC.tabBarItem = UITabBarItem(
+        navigationController.viewControllers = [vc]
+
+        navigationController.tabBarItem = UITabBarItem(
             title: L.Catalog.title,
             image: A.Icons.TabBar.catalog.image,
             selectedImage: nil
         )
 
-        return navVC
+        return navigationController
     }
 
     private var cartNavigationController: UINavigationController {

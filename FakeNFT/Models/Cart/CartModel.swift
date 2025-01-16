@@ -7,7 +7,13 @@
 
 import Foundation
 
+
+struct Order: Codable {
+  let id: String
+  let nfts: [String]
+}
+
 struct CartModel: Codable,Equatable {
     let id: String
-    let nfts: [String] 
+    let nfts: [String]
 }

@@ -9,8 +9,10 @@ import Foundation
 
 struct GetPaymentRequest: NetworkRequest {
     let id: String
+    
     var endpoint: URL? {
         Endpoint.payment(id: self.id).url
     }
+
     var dto: Dto?
 }

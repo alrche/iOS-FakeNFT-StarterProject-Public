@@ -62,6 +62,11 @@ public enum A {
     public enum Cart {
       public static let successPay = ImageAsset(name: "successPay")
     }
+    public enum Catalog {
+      public static let archie = ImageAsset(name: "archie")
+      public static let peach = ImageAsset(name: "peach")
+      public static let peachMaxi = ImageAsset(name: "peachMaxi")
+    }
     public enum Profile {
       public static let avatar = ImageAsset(name: "avatar")
       public static let stub = ImageAsset(name: "stub")

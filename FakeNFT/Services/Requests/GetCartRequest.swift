@@ -8,14 +8,15 @@
 import Foundation
 
 struct GetCartRequest: NetworkRequest {
-    
+
     var endpoint: URL? {
         Endpoint.cart.url
     }
-    
+
     var httpMethod: HttpMethod {
         .get
     }
 
     var dto: Dto?
 }
+
