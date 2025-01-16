@@ -13,7 +13,7 @@ enum Endpoint {
     case nftById(id: String)
     case currency
     case payment(id: String)
-    
+
     static let baseURL = URL(string: RequestConstants.baseURL)!
 
     var path: String {
@@ -25,7 +25,7 @@ enum Endpoint {
         case .payment(let id): return "/api/v1/orders/1/payment/\(id)"
         }
     }
-    
+
     var url: URL? {
         switch self {
         case .cart: return URL(string: Endpoint.cart.path, relativeTo: Endpoint.baseURL)
