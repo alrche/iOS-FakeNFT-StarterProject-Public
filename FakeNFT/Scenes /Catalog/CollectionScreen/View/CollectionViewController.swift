@@ -251,7 +251,6 @@ extension CollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NFTCellForCollectionView.reuseIdentifier, for: indexPath) as? NFTCellForCollectionView
         else {
-            print("Не прошёл каст к NFTCellForCollectionView")
             return UICollectionViewCell()
         }
         
@@ -259,9 +258,9 @@ extension CollectionViewController: UICollectionViewDataSource {
         var isLike = false
         var inCart = false
         let nft = viewModel.collection(at: indexPath.row)
-        let  likes = viewModel.getLikes()
+        let likes = viewModel.getLikes()
         let cart = viewModel.getCart()
-        if let  index = likes.firstIndex(of: nft.id) {
+        if let index = likes.firstIndex(of: nft.id) {
             isLike = true
         } else {
             isLike = false

@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias OrderCompletion = (Result<Order, Error>) -> Void
+typealias OrderCompletion = (Result<CartModel, Error>) -> Void
 typealias CurrencyListCompletion = (Result<[CurrencyModel], Error>) -> Void
 typealias PaymentConfirmationRequest = (Result<PaymentResponse, Error>) -> Void
 
@@ -15,7 +15,7 @@ protocol OrderService {
     func loadOrder(completion: @escaping OrderCompletion)
     func loadCurrencyList(completion: @escaping CurrencyListCompletion)
     func updateOrder(nftsIds: [String], completion: @escaping OrderCompletion)
-    func loadPayment(currencyId: String, completion: @escaping PaymentConfirmationRequest)
+    func loadPayment(id: String, completion: @escaping PaymentConfirmationRequest)
 }
 
 final class OrderServiceImpl: OrderService {
@@ -27,7 +27,7 @@ final class OrderServiceImpl: OrderService {
     }
     
     func loadOrder(completion: @escaping OrderCompletion) {
-        networkClient.send(request: NFTOrderRequest(), type: Order.self) { result in
+        networkClient.send(request: GetCartRequest(), type: CartModel.self) { result in
             switch result {
             case .success(let order):
                 completion(.success(order))
@@ -38,7 +38,7 @@ final class OrderServiceImpl: OrderService {
     }
     
     func loadCurrencyList(completion: @escaping CurrencyListCompletion) {
-        networkClient.send(request: CurrencyListRequest(), type: [CurrencyModel].self) { result in
+        networkClient.send(request: GetCurrenciesRequest(), type: [CurrencyModel].self) { result in
             switch result {
             case .success(let currencies):
                 print("Received currencies: \(currencies)")
@@ -54,7 +54,7 @@ final class OrderServiceImpl: OrderService {
         let newOrderModel = NewOrderModel(nfts: nftsIds)
         let request = EditOrderRequest(newOrder: newOrderModel)
         
-        networkClient.send(request: request, type: Order.self) { result in
+        networkClient.send(request: request, type: CartModel.self) { result in
             switch result {
             case .success(let order):
                 completion(.success(order))
@@ -64,8 +64,8 @@ final class OrderServiceImpl: OrderService {
         }
     }
     
-    func loadPayment(currencyId: String, completion: @escaping PaymentConfirmationRequest) {
-        networkClient.send(request: PaymentRequest(), type: PaymentResponse.self) { result in
+    func loadPayment(id: String, completion: @escaping PaymentConfirmationRequest) {
+        networkClient.send(request: GetPaymentRequest(id: id), type: PaymentResponse.self) { result in
             switch result {
             case .success(let payment):
                 print("Received currencies: \(payment)")

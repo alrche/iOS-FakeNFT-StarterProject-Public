@@ -10,10 +10,16 @@
 
 import Foundation
 
-struct CurrencyListRequest: NetworkRequest {
+struct GetCurrenciesRequest: NetworkRequest {
+    
     var endpoint: URL? {
-        URL(string: "\(RequestConstants.baseURL)/api/v1/currencies")
+        Endpoint.currency.url
     }
+    
+    var httpMethod: HttpMethod {
+        .get
+    }
+    
     var dto: (any Dto)?
 }
 

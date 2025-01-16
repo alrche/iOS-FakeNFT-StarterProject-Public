@@ -50,7 +50,7 @@ final class StorageService {
     
     // MARK: - Initializers
     
-    private init() {}
+    init() {}
 }
 
 extension StorageService: ProfileStorage {

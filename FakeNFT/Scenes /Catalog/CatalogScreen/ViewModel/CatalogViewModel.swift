@@ -14,8 +14,8 @@ protocol CatalogViewModelProtocol: AnyObject {
     func collection(at index: Int) -> NFTModelCatalog
     func getProfile(completion: @escaping () -> Void)
     var reloadTableView: (() -> Void)? { get set }
-    var profile: Profile? { get set }
-    var order: Order? { get set }
+    var profile: ProfileModel? { get set }
+    var order: CartModel? { get set }
     
     func sortByName()
     func sortByCount()
@@ -28,8 +28,8 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     private let orderService = OrderServiceImpl(networkClient: DefaultNetworkClient())
     private let sortOptionKey = "sortOptionKey"
     private var catalog: [NFTModelCatalog] = []
-    var profile: Profile?
-    var  order: Order?
+    var profile: ProfileModel?
+    var  order: CartModel?
     var reloadTableView: (() -> Void)?
     
     func fetchCollections(completion: @escaping () -> Void) {
@@ -87,7 +87,6 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     }
     
     func getProfile(completion: @escaping () -> Void) {
-        print("Вызвали getProfile")
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
         loadProfile { [weak self] result in
@@ -105,8 +104,8 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     }
     
     func loadProfile(completion: @escaping ProfileCompletion) {
-        let request = ProfileRequest()
-        networkClient.send(request: request, type: Profile.self) { [weak self] result in
+        let request = GetProfileRequest()
+        networkClient.send(request: request, type: ProfileModel.self) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let newProfile):
