@@ -1,8 +1,22 @@
+# Установка
+
+- Установить `CocoaPods`, если нет
+- Склонировать проект
+- Перейти в директорию проекта
+- Вызвать команду `pod install`
+- Открыть `FakeNFT.xcworkspace` в `Xcode`
+- Зависимости `SPM` установятся автоматически
+  
 # ТЗ мобильного приложения FakeNFT
 
 # Ссылки
 
 [Дизайн Figma](https://www.figma.com/file/k1LcgXHGTHIeiCv4XuPbND/FakeNFT-(YP)?node-id=96-5542&t=YdNbOI8EcqdYmDeg-0)
+
+Скринкаст эпиков:
+- [Каталог](https://disk.yandex.ru/i/QZ6cy0mhvpAQ9Q)
+- [Корзина](https://disk.yandex.ru/i/iuCf_Yy8mZZ9bA)
+- [Профиль](https://disk.yandex.ru/i/84HdoEfbq88OdA)
 
 # Назначение и цели приложения
 

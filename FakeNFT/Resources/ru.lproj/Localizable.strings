@@ -1,0 +1,96 @@
+/* 
+  Localizable.strings
+  FakeNFT
+
+  Created by Aliaksandr Charnyshou on 11.12.2024.
+  
+*/
+
+"alert.ok" = "ОК";
+"alert.yes" = "Да";
+"alert.no" = "Нет";
+"alert.close" = "Закрыть";
+"alert.cancel" = "Отменить";
+"alert.tryAgain" = "Попробовать еще раз";
+"alert.repeat" = "Повторить";
+"alert.sort.title" = "Сортировка";
+"alert.sort.price" = "По цене";
+"alert.sort.rating" = "По рейтингу";
+"alert.sort.name" = "По названию";
+"alert.sort.amount" = "По количеству NFT";
+
+"ptr" = "Потяните, чтобы обновить";
+
+"network.error.httpStatusCode" = "Что-то пошло не так";
+"network.error.httpStatusCode4xx" = "Ошибка клиента";
+"network.error.httpStatusCode5xx" = "Ошибка сервера";
+"network.error.httpStatusCode429" = "Слишком много запросов. Попробуйте снова позже.";
+"network.error.urlRequestError" = "Что-то пошло не так";
+"network.error.urlSessionError" = "Что-то пошло не так";
+"network.error.parsingError" = "Не удалось обработать ответ сервера";
+
+"profile.title" = "Профиль";
+"profile.name" = "Имя";
+"profile.description" = "Описание";
+"profile.website" = "Сайт";
+"profile.about" = "О разработчике";
+"profile.avatar.change" = "Сменить\nфото";
+"profile.alert.avatar.title" = "Сменить фото";
+"profile.alert.avatar.subtitle" = "Введите URL нового фото";
+"profile.alert.avatar.placeholder" = "Введите URL";
+"profile.alert.urlError" = "Произошла ошибка при парсинге ссылки";
+"profile.alert.fetchError" = "Произошла ошибка во время загрузки профиля";
+"profile.alert.editError" = "Произошла ошибка во время изменения данных профиля";
+"profile.alert.saveChanges" = "Вы хотите сохранить изменения?";
+
+"profile.myNFT.title" = "Мои NFT";
+"profile.myNFT.empty" = "У Вас еще нет NFT";
+"profile.myNFT.search.placeholder" = "Введите название NFT или имя автора";
+"profile.myNFT.nothingFound" = "Ничего не найдено";
+"profile.myNFT.price.title" = "Цена";
+"profile.myNFT.author.title" = "от";
+"profile.myNFT.alert.fetchError" = "Произошла ошибка во время загрузки NFT";
+
+"profile.favouriteNFT.title" = "Избранные NFT";
+"profile.favouriteNFT.empty" = "У Вас еще нет избранных NFT";
+"profile.favouriteNFT.search.placeholder" = "Введите название избранного NFT";
+"profile.favouriteNFT.nothingFound" = "Ничего не найдено";
+"profile.favouriteNFT.alert.fetchError" = "Произошла ошибка во время загрузки избранных NFT";
+"profile.favouriteNFT.alert.unlikeError" = "Произошла ошибка во время снятия лайка";
+
+"profile.aboutDeveloper.title" = "О разработчике";
+
+"cart.title" = "Корзина";
+"cart.pay" = "Оплатить";
+"cart.toBePaid" = "К оплате";
+"cart.price" = "Цена";
+"cart.delete" = "Удалить";
+"cart.return" =  "Вернуться";
+"cart.deleteQuestion" = "Вы уверены, что хотите\nудалить объект из корзины?";
+"cart.cartEmpty" = "Корзина пуста";
+"cart.choosePay" = "Выберите способ оплаты";
+"cart.userAgreementStart" = "Совершая покупку, вы соглашаетесь с условиями";
+"cart.userAgreementEnd" = "Пользовательского соглашения";
+"cart.successPay" = "Успех! Оплата прошла,\nпоздравляем с покупкой!";
+"cart.backCataloge" = "Вернуться в каталог";
+"cart.failurePay" = "Не удалось произвести\nоплату";
+"cart.networkAlertTitle" = "Что-то пошло не так(";
+"cart.networkAlertMessage" = "Проблема с интернет-соединением";
+
+"statistics.title" = "Статистика";
+"statistics.sorted" = "Сортировка";
+"statistics.byName" = "По имени";
+"statistics.byRating" = "По рейтингу";
+"statistics.close" = "Закрыть";
+"statistics.goToWebsite" = "Перейти на сайт пользователя";
+"statistics.collectionNFT" = "Коллекция NFT";
+"statistics.Error" = "Проблемы с интернет соединением";
+"statistics.ErrorAction" = "Еще раз";
+"statistics.ErrorActionCancel" = "Выход";
+"statistics.isEmpty" = "Тут пусто";
+
+"catalog.title" = "Каталог";
+"catalog.ETH" = "ETH";
+"catalog.openNft" = "Открыть Nft";
+"catalog.collectionAuthor" = "Автор коллекции:";
+"catalog.addToCart" = "Добавить в корзину";
