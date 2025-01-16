@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Profile: Codable, Equatable {
+struct ProfileModel: Codable, Equatable {
     var name: String
     var avatar: String
     var description: String
